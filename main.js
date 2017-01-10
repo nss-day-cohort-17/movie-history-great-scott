@@ -2,17 +2,17 @@
 
 
 
+function getMovie(){
+    var movieTitle = $('#movieTitle').val()
+    console.log(movieTitle)
+    //grabbing API JSON
+    $.ajax({url:`https://www.omdbapi.com/?t=${movieTitle}+&y=&plot=full&r=json`})
+        .done(function(e) {
+        console.log(e);
+      })
 
+}
 
+$('#new-movie').click(getMovie)
 
-
-
-var movieTitle = $('#getMovieButton').click($('#movieTitle').text())
-
-console.log(movieTitle)
-
-//grabbing API JSON
-var getMovie = $.ajax( "www.omdbapi.com/?t='${movieTitle}'&y=&plot=full&r=json")
-  .done(function() {
-    alert( "success" );
-  })
+  console.log()
