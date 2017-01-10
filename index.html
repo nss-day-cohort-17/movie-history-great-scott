@@ -7,16 +7,16 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <div class="input-group">
-  <input id="movieTitle" type="text" class="form-control" placeholder="Search Movies" aria-describedby="basic-addon2">
-  <button id="getMovieButton"><span class="input-group-addon" id="basic-addon2">SEARCH</span></button>
-</div>
-
-
-
-  </div>
-
+  <header class="main-header">
+    <div class="container button-wrapper">
+      <div class="input-group">
+        <input id="movieTitle" type="text" class="form-control" placeholder="Search Movies" aria-describedby="basic-addon2">
+      </div>
+      <input class="btn btn-default" id="new-movie" type="button" value="Find New Movies">
+      <input class="btn btn-default" id="search-movie" type="button" value="Search Your Movies">
+      <input class="btn btn-default" id="login" type="button" value="Login/Register">
+    </div>
+  </header>
 
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
