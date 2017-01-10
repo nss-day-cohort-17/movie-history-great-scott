@@ -7,23 +7,12 @@
 
 
 
-var movieTitle = $('').click($('#movieTitle').text())
+var movieTitle = $('#getMovieButton').click($('#movieTitle').text())
 
 console.log(movieTitle)
 
 //grabbing API JSON
-function getJSON(url, cb) {
-  return new Promise(function(resolve, reject) {
-    var xhr = new XMLHttpRequest()
-    xhr.addEventListener('load', function(event){
-          resolve(JSON.parse(event.target.responseText))
-      }
-
-    })
-    xhr.open('GET','www.omdbapi.com/?t='${movieTitle}'&y=&plot=full&r=json')
-    xhr.send()
+var getMovie = $.ajax( "www.omdbapi.com/?t='${movieTitle}'&y=&plot=full&r=json")
+  .done(function() {
+    alert( "success" );
   })
-}
-
-getJSON()
-.then()
