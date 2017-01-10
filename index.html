@@ -4,15 +4,20 @@
   <meta charset="UTF-8">
   <title>Movie History</title>
   <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
   <header class="main-header">
-    <div class="button-wrapper">
+    <div class="container button-wrapper">
+      <div class="input-group">
+        <input id="movieTitle" type="text" class="form-control" placeholder="Search Movies" aria-describedby="basic-addon2">
+      </div>
       <input class="btn btn-default" id="new-movie" type="button" value="Find New Movies">
       <input class="btn btn-default" id="search-movie" type="button" value="Search Your Movies">
       <input class="btn btn-default" id="login" type="button" value="Login/Register">
     </div>
   </header>
+
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 </body>
