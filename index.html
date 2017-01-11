@@ -7,20 +7,22 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <header class="main-header">
-    <div class="container button-wrapper">
-      <div class="input-group">
-        <input id="movieTitle" type="text" class="form-control" placeholder="Search Movies" aria-describedby="basic-addon2">
-      </div>
-      <input class="btn btn-default" id="new-movie" type="button" value="Find New Movies">
-      <input class="btn btn-default" id="search-movie" type="button" value="Search Your Movies">
-      <input class="btn btn-default" id="login" type="button" value="Login/Register">
+  <header class="main-header container navbar-fixed-top">
+    <div class="input-group">
+      <input id="movieTitle" type="text" class="form-control" placeholder="Movie Title" aria-describedby="basic-addon2">
+      <input class="btn btn-primary" id="login" type="button" value="Login/Register">
+    </div>
+    <div class="button-group">
+      <input class="btn btn-info" id="new-movie" type="button" value="Find New Movies">
+      <input class="btn btn-info" id="search-movie" type="button" value="Search Your Movies">
     </div>
   </header>
 
-
+  <div class="card-wrapper">
+    <div class="movie-card"></div>
+  </div>
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-   <script src="main.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
