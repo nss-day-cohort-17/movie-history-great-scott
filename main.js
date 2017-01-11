@@ -1,14 +1,12 @@
 
-var movieText = "";
-
-
-
 function getMovie(){
     var movieTitle = $('#movieTitle').val()
     console.log(movieTitle)
+
     //grabbing API JSON
-    var request = $.ajax({url:`https://www.omdbapi.com/?t=${movieTitle}+&y=&plot=full&r=json`})
+ $.ajax({url:`https://www.omdbapi.com/?t=${movieTitle}=&plot=full&r=json`})
         .done(function(e) {
+            $(".movie-body").empty()
             if(e.Error){
                 failMovie(e)
             }else{
@@ -23,16 +21,16 @@ $('#new-movie').click(getMovie)
 
 function failMovie(data){
 
-    $(".movie-body").append(data.Error)
+    $(".movie-body").append(`<h1>${data.Error}</h1>`)
+
     console.log("no movie")
 }
 
 function loadMovie(data){
-    console.log(data)
-    console.log(data.imdbRating)
+//     console.log(data)
+//     console.log(data.imdbRating)
+    $(".movie-body").append(`<div movie-card row col-md-4>
 
-
-    $(".movie-body").append(`<div movie-card>
                                 <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
                                 <div class="title"> ${data.Title}</div>
                                 <div class="year"> ${data.Year}</div>
@@ -40,6 +38,7 @@ function loadMovie(data){
                             </div>`)
         vailidateRating(data)
         watchedCheckbox(data)
+        $('#movieTitle').val('').focus()
 }
 
 function vailidateRating(data){
