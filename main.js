@@ -6,9 +6,12 @@ function getMovie(){
     //grabbing API JSON
  $.ajax({url:`https://www.omdbapi.com/?t=${movieTitle}=&plot=full&r=json`})
         .done(function(e) {
+            //reset movie search
             $(".movie-body").empty()
+            //if checks for movie error
             if(e.Error){
                 failMovie(e)
+            //else uses vaild movie info   
             }else{
                 loadMovie(e)
             }
@@ -26,9 +29,10 @@ function failMovie(data){
     console.log("no movie")
 }
 
+//Loads movie card with basic info about movie
 function loadMovie(data){
-//     console.log(data)
-//     console.log(data.imdbRating)
+    //appends card to html
+
     $(".movie-body").append(`<div movie-card row col-md-4>
 
                                 <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
@@ -36,12 +40,12 @@ function loadMovie(data){
                                 <div class="year"> ${data.Year}</div>
                                 <div class="actors">Main Actors: ${data.Actors}</div>
                             </div>`)
-        vailidateRating(data)
+        validateRating(data)
         watchedCheckbox(data)
         $('#movieTitle').val('').focus()
 }
-
-function vailidateRating(data){
+//Valdates if there is a number rating and rounds it
+function validateRating(data){
     if(data.imdbRating ==="N/A"){
         $(".movie-body").append(`<div class="rating-of-5">No ranking found</div>`)
     }else{
@@ -49,7 +53,7 @@ function vailidateRating(data){
     }
 }
 
-
+//Valdates the watch or un-watched checkbox
 function watchedCheckbox(data){
     $(".movie-body").append(`<label>Check box if watched</label><button type="checkbox" class="watched"></button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
 
