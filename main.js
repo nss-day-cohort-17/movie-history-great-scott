@@ -1,6 +1,6 @@
 
 var movieText = "";
-
+var newMovieData = {}
 
 
 function getMovie(){
