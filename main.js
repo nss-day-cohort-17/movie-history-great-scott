@@ -1,4 +1,6 @@
 
+var newMovieData = {}
+
 function getMovie(){
     var movieTitle = $('#movieTitle').val()
     console.log(movieTitle)
@@ -31,8 +33,46 @@ function failMovie(data){
 
 //Loads movie card with basic info about movie
 function loadMovie(data){
-    //appends card to html
 
+    var actors = data.Actors
+    newMovieData = {
+                        "title" : data.Title,
+                        "year" : data.Year,
+                        "actors" : actors.split(", "),
+                        "rating" : Math.round(data.imdbRating/2),
+                        "watched" : false
+                    }
+    console.log(JSON.stringify(newMovieData))
+    $(".movie-card").append(`<div class="title">Title: ${data.Title}</div>
+                             <div class="year">Year: ${data.Year}</div>
+                             <div class="actors">Main Actors: ${data.Actors}</div>
+                             <div class="rating-of-5">Rating Out Of 5: ${data.imdbRating/2}</div>
+                             <label>Check box if watched</label><button type="checkbox" class="watched"></button>
+                            <input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
+
+}
+
+// firebase: https://movie-history-great-scott.firebaseio.com/.json
+function saveMovie(e){
+    console.log("new log",newMovieData)
+    $.ajax({
+        accept: "application/json",
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        url: "https://movie-history-great-scott.firebaseio.com/.json",
+        data: JSON.stringify(newMovieData)
+    });
+}
+
+$("body").click(function(e){
+    console.log(e)
+    if (e.target.id === "save-movie") {
+        console.log('inside if')
+        saveMovie();
+    }
+})
+    //appends card to html
     $(".movie-body").append(`<div movie-card row col-md-4>
 
                                 <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
@@ -59,5 +99,3 @@ function watchedCheckbox(data){
 
 }
 
-
-function iWatchedThe
