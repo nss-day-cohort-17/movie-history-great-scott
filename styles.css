@@ -27,8 +27,10 @@ body {
 }
 .movie-body {
    text-align: center;
+       padding-top: 15rem;
 }
 .movie-card{
+
     border: black solid 1px;
     max-width: 50%;
     min-width: 50%;
@@ -51,7 +53,7 @@ body {
 }
 
 
-.save-movie {
+#save-movie {
 margin-left:2rem;
 
 }
