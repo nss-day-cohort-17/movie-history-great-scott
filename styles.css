@@ -28,8 +28,10 @@ body {
 .movie-body {
     padding: 15rem;
    text-align: center;
+       padding-top: 15rem;
 }
 .movie-card{
+
     border: black solid 1px;
     max-width: 50%;
     min-width: 50%;
