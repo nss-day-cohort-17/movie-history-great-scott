@@ -18,3 +18,5 @@ function loadMovie(data){
                              <div class="rating-of-5">Rating Out Of 5: ${data.imdbRating/2}</div>
                              <button type="checkbox" class="watched"></button>`)
 }
+
+// firebase: https://movie-history-great-scott.firebaseio.com/.json
