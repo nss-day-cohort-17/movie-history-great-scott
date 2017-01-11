@@ -3,21 +3,34 @@ function getMovie(){
     var movieTitle = $('#movieTitle').val()
     console.log(movieTitle)
     //grabbing API JSON
-    $.ajax({url:`https://www.omdbapi.com/?t=${movieTitle}+&y=&plot=full&r=json`}).done(loadMovie)
+    var request = $.ajax({url:`https://www.omdbapi.com/?t=${movieTitle}+&y=&plot=full&r=json`})
+        .done(function(e) {
+            if(e.Error){
+                failMovie(e)
+            }else{
+                loadMovie(e)
+            }
+        })
+        .fail(failMovie)
 
 }
 
 $('#new-movie').click(getMovie)
 
+function failMovie(data){
+    $(".movie-body").append(data.Error)
+    console.log("no movie")
+}
+
 function loadMovie(data){
     console.log(data)
     console.log(data.imdbRating)
     $(".movie-body").append(`<div movie-card>
-                                <img src="${data.Poster}" alt="${data.Title} movie poster">
+                                <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
                                 <div class="title">Title: ${data.Title}</div>
                                 <div class="year">Year: ${data.Year}</div>
                                 <div class="actors">Main Actors: ${data.Actors}</div>
-                            </div>    `)
+                            </div>`)
         vailidateRating(data)
         watchedCheckbox(data)
 }
@@ -31,6 +44,5 @@ function vailidateRating(data){
 }
 
 function watchedCheckbox(data){
-    $(".movie-body").append(`<button type="checkbox" class="watched">Watched?</button>`)
-
+    $(".movie-body").append(`<button type="checkbox" class="watched"></button><label>Have you watched this movie?</label>`)
 }
