@@ -16,6 +16,17 @@ $('#new-movie').click(getMovie)
 function loadMovie(data){
     console.log(data)
     console.log(data.imdbRating)
+    var title: data.Title
+    var actors = data.Actors
+    newMovieData = { title :
+                     {
+                         "year" : data.Year,
+                         "actors" : actors.split(", "),
+                         "rating" : Math.round(data.imdbRating/2),
+                         "watched" : false
+                     }
+    }
+    console.log(newMovieData)
     $(".movie-card").append(`<div class="title">Title: ${data.Title}</div>
                              <div class="year">Year: ${data.Year}</div>
                              <div class="actors">Main Actors: ${data.Actors}</div>
