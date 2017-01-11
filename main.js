@@ -13,7 +13,7 @@ function getMovie(){
             //if checks for movie error
             if(e.Error){
                 failMovie(e)
-            //else uses vaild movie info   
+            //else uses vaild movie info
             }else{
                 loadMovie(e)
             }
@@ -43,12 +43,17 @@ function loadMovie(data){
                         "watched" : false
                     }
     console.log(JSON.stringify(newMovieData))
-    $(".movie-card").append(`<div class="title">Title: ${data.Title}</div>
-                             <div class="year">Year: ${data.Year}</div>
-                             <div class="actors">Main Actors: ${data.Actors}</div>
-                             <div class="rating-of-5">Rating Out Of 5: ${data.imdbRating/2}</div>
-                             <label>Check box if watched</label><button type="checkbox" class="watched"></button>
-                            <input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
+    //appends card to html
+    $(".movie-body").append(`<div movie-card row col-md-4>
+
+                                <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
+                                <div class="title"> ${data.Title}</div>
+                                <div class="year"> ${data.Year}</div>
+                                <div class="actors">Main Actors: ${data.Actors}</div>
+                            </div>`)
+        validateRating(data)
+        watchedCheckbox(data)
+        $('#movieTitle').val('').focus()
 
 }
 
@@ -67,23 +72,14 @@ function saveMovie(e){
 
 $("body").click(function(e){
     console.log(e)
-    if (e.target.id === "save-movie") {
-        console.log('inside if')
-        saveMovie();
-    }
-})
-    //appends card to html
-    $(".movie-body").append(`<div movie-card row col-md-4>
+        if (e.target.id === "save-movie") {
+            console.log('inside if')
+            saveMovie();
+        }
+    })
 
-                                <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
-                                <div class="title"> ${data.Title}</div>
-                                <div class="year"> ${data.Year}</div>
-                                <div class="actors">Main Actors: ${data.Actors}</div>
-                            </div>`)
-        validateRating(data)
-        watchedCheckbox(data)
-        $('#movieTitle').val('').focus()
-}
+
+
 //Valdates if there is a number rating and rounds it
 function validateRating(data){
     if(data.imdbRating ==="N/A"){
@@ -98,4 +94,3 @@ function watchedCheckbox(data){
     $(".movie-body").append(`<label>Check box if watched</label><button type="checkbox" class="watched"></button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
 
 }
-
