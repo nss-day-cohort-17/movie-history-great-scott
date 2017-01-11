@@ -1,4 +1,8 @@
 
+var movieText = "";
+
+
+
 function getMovie(){
     var movieTitle = $('#movieTitle').val()
     console.log(movieTitle)
@@ -12,6 +16,7 @@ $('#new-movie').click(getMovie)
 function loadMovie(data){
     console.log(data)
     console.log(data.imdbRating)
+
     $(".movie-body").append(`<div movie-card>
                                 <img src="${data.Poster}" alt="${data.Title} movie poster">
                                 <div class="title">Title: ${data.Title}</div>
@@ -31,6 +36,7 @@ function vailidateRating(data){
 }
 
 function watchedCheckbox(data){
-    $(".movie-body").append(`<button type="checkbox" class="watched">Watched?</button>`)
+    $(".movie-body").append(`<label>Check box if watched</label><button type="checkbox" class="watched">Watched?</button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
+
 
 }
