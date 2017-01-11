@@ -20,6 +20,7 @@ function loadMovie(data){
                              <div class="year">Year: ${data.Year}</div>
                              <div class="actors">Main Actors: ${data.Actors}</div>
                              <div class="rating-of-5">Rating Out Of 5: ${data.imdbRating/2}</div>
-                             <button type="checkbox" class="watched"></button>`)
+                             <label>Check box if watched</label><button type="checkbox" class="watched"></button>
+                            <input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
 
 }
