@@ -9,7 +9,7 @@ function getMovie(){
  $.ajax({url:`https://www.omdbapi.com/?t=${movieTitle}=&plot=full&r=json`})
         .done(function(e) {
             //reset movie search
-            $(".movie-body").empty()
+            clearMovie()
             //if checks for movie error
             if(e.Error){
                 failMovie(e)
@@ -45,7 +45,6 @@ function loadMovie(data){
     console.log(JSON.stringify(newMovieData))
     //appends card to html
     $(".movie-body").append(`<div movie-card row col-md-4>
-
                                 <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
                                 <div class="title"> ${data.Title}</div>
                                 <div class="year"> ${data.Year}</div>
@@ -68,6 +67,7 @@ function saveMovie(e){
         url: "https://movie-history-great-scott.firebaseio.com/.json",
         data: JSON.stringify(newMovieData)
     });
+    clearMovie()
 }
 
 $("body").click(function(e){
@@ -93,4 +93,9 @@ function validateRating(data){
 function watchedCheckbox(data){
     $(".movie-body").append(`<label>Check box if watched</label><button type="checkbox" class="watched"></button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
 
+}
+
+function clearMovie(){
+    $(".movie-body").empty()
+    $('#movieTitle').val('').focus()
 }
