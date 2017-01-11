@@ -25,12 +25,13 @@ function failMovie(data){
 }
 
 function loadMovie(data){
-    console.log(data)
-    console.log(data.imdbRating)
+//     console.log(data)
+//     console.log(data.imdbRating)
     $(".movie-body").append(`<div movie-card row col-md-4>
+
                                 <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
-                                <div class="title">Title: ${data.Title}</div>
-                                <div class="year">Year: ${data.Year}</div>
+                                <div class="title"> ${data.Title}</div>
+                                <div class="year"> ${data.Year}</div>
                                 <div class="actors">Main Actors: ${data.Actors}</div>
                             </div>`)
         vailidateRating(data)
@@ -42,7 +43,7 @@ function vailidateRating(data){
     if(data.imdbRating ==="N/A"){
         $(".movie-body").append(`<div class="rating-of-5">No ranking found</div>`)
     }else{
-        $(".movie-body").append(`<div class="rating-of-5">Rating Out Of 5: ${Math.round(data.imdbRating/2)}</div>`)
+        $(".movie-body").append(`<div class="rating-of-5">Rating: ${Math.round(data.imdbRating/2)}</div>`)
     }
 }
 
