@@ -16,17 +16,15 @@ $('#new-movie').click(getMovie)
 function loadMovie(data){
     console.log(data)
     console.log(data.imdbRating)
-    var title: data.Title
     var actors = data.Actors
-    newMovieData = { title :
-                     {
-                         "year" : data.Year,
-                         "actors" : actors.split(", "),
-                         "rating" : Math.round(data.imdbRating/2),
-                         "watched" : false
-                     }
-    }
-    console.log(newMovieData)
+    newMovieData = {
+                        "title" : data.Title,
+                        "year" : data.Year,
+                        "actors" : actors.split(", "),
+                        "rating" : Math.round(data.imdbRating/2),
+                        "watched" : false
+                    }
+    console.log(JSON.stringify(newMovieData))
     $(".movie-card").append(`<div class="title">Title: ${data.Title}</div>
                              <div class="year">Year: ${data.Year}</div>
                              <div class="actors">Main Actors: ${data.Actors}</div>
@@ -37,8 +35,22 @@ function loadMovie(data){
 }
 
 // firebase: https://movie-history-great-scott.firebaseio.com/.json
-function saveMovie(){
-    $.post("https://movie-history-great-scott.firebaseio.com/.json", newMovieData)
+function saveMovie(e){
+    console.log("new log",newMovieData)
+    $.ajax({
+        accept: "application/json",
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        url: "https://movie-history-great-scott.firebaseio.com/.json",
+        data: JSON.stringify(newMovieData)
+    });
 }
 
-$("#save-movie").click(saveMovie)
+$("body").click(function(e){
+    console.log(e)
+    if (e.target.id === "save-movie") {
+        console.log('inside if')
+        saveMovie();
+    }
+})
