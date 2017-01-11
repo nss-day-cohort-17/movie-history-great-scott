@@ -37,3 +37,8 @@ function loadMovie(data){
 }
 
 // firebase: https://movie-history-great-scott.firebaseio.com/.json
+function saveMovie(){
+    $.post("https://movie-history-great-scott.firebaseio.com/.json", newMovieData)
+}
+
+$("#save-movie").click(saveMovie)
