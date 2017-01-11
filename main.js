@@ -3,7 +3,7 @@ var newMovieData = {}
 
 function getMovie(){
     var movieTitle = $('#movieTitle').val()
-    console.log(movieTitle)
+    // console.log(movieTitle)
 
     //grabbing API JSON
  $.ajax({url:`https://www.omdbapi.com/?t=${movieTitle}=&plot=full&r=json`})
@@ -22,7 +22,10 @@ function getMovie(){
 
 }
 
-$('#new-movie').click(getMovie)
+$('#new-movie').click(function(){
+     $('.movie-body').show()
+    getMovie()
+})
 
 function failMovie(data){
 
@@ -59,7 +62,7 @@ function loadMovie(data){
 
 // firebase: https://movie-history-great-scott.firebaseio.com/.json
 function saveMovie(e){
-    console.log("new log",newMovieData)
+    // console.log("new log",newMovieData)
     $.ajax({
         accept: "application/json",
         type: 'POST',
@@ -71,12 +74,59 @@ function saveMovie(e){
 }
 
 $("body").click(function(e){
-    console.log(e)
+    // console.log(e)
         if (e.target.id === "save-movie") {
-            console.log('inside if')
+
+            // console.log('inside if')
             saveMovie();
         }
     })
+//====my movie pages display/hide
+$("#search-movie").click(function(){
+    $('.movie-body').hide()
+    $( ".myMovies" ).show( "slow", function() {
+            myMovies()
+  });
+})
+
+var myMoviesInFireBase;
+// go get saved  movies from firebase
+function myMovies(){
+    // console.log("new log",newMovieData)
+    $.ajax({url: "https://movie-history-great-scott.firebaseio.com/.json"})
+        .done(function(e) {
+
+        populateMyMoviesPage(e) // <--send saved movies to function populateMyMoviesPage
+
+        // console.log("your saved movies are:", e)
+
+})
+
+}
+
+function populateMyMoviesPage(data) {
+console.log(data)
+// var myMData = Object.keys(data)
+// console.log(myMData)
+
+        for(var obj in data) {
+
+             console.log(data[obj].actors)
+
+// for (var i =0; i < data[obj].actors.length; i++) {
+//    console.log("actors:", data[obj].actors[i])
+// }
+         }
+
+            // $(".myMovies").append(`<div movie-card row col-md-4>
+
+            //                     <div class="title"> ${[i].Title}</div>
+
+            //                 </div>`)
+
+    }
+
+// }  end for loop
 
 
 
