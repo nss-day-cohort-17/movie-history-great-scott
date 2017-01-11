@@ -22,6 +22,7 @@ function getMovie(){
 $('#new-movie').click(getMovie)
 
 function failMovie(data){
+
     $(".movie-body").append(data.Error)
     console.log("no movie")
 }
@@ -51,5 +52,9 @@ function vailidateRating(data){
 
 
 function watchedCheckbox(data){
-    $(".movie-body").append(`<label>Check box if watched</label><button type="checkbox" class="watched">Watched?</button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
+    $(".movie-body").append(`<label>Check box if watched</label><button type="checkbox" class="watched"></button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
+
 }
+
+
+function iWatchedThe
