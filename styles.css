@@ -17,10 +17,44 @@
 
 
 /*body styles*/
+
+body {
+  background-color: #e3e0cf;
+
+}
 .card-wrapper {
   margin-top: 100px;
 }
 
 .movie-card{
-    border: black solid 4px;
+    border: black solid 1px;
+    max-width: 50%;
+    min-width: 50%;
+    background-color: #e9ece5;
+    text-align: center;
+    margin-left: 5.7rem;
+    overflow-y: scroll;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
+
+
+/*card styles*/
+.watched {
+  margin-left: 3rem;
+  padding-top: 1rem;
+}
+.title {
+  font-size: 4rem;
+}
+
+
+.save-movie {
+margin-left:2rem;
+
+}
+
+/*.year
+
+.actors
+.rating-of-5*/
