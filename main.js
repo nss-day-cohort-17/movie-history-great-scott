@@ -102,11 +102,6 @@ function validateRating(data){
     }
 }
 
-//Valdates the watch or un-watched checkbox
-function watchedCheckbox(data){
-    $(".movie-body").append(`<label>Check box if watched</label><button type="checkbox" class="watched"></button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
-
-}
 
 function clearMovie(){
     $(".movie-body").empty()
