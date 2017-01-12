@@ -74,14 +74,23 @@ function saveMovie(e){
     clearMovie()
 }
 
-$("body").click(function(e){
-    console.log(e)
-        if (e.target.id === "save-movie") {
-            console.log('inside if')
-            saveMovie();
-        }
-    })
+function watched() {
+    var watchedChx = $('#watchedCheck')
+    console.log("newMovieData", newMovieData)
+    if (watchedChx.checked) {
+        newMovieData.watched = true
+    } else {
+        newMovieData.watched = false
+    }
+}
 
+$("body").on('click', '#save-movie', function(){
+    saveMovie()
+})
+
+$("body").on('click', '#watchedChecked', function(){
+    watched()
+})
 
 
 //Valdates if there is a number rating and rounds it
