@@ -9,7 +9,7 @@ function getMovie(){
  $.ajax({url:`https://www.omdbapi.com/?t=${movieTitle}=&plot=full&r=json`})
         .done(function(e) {
             //reset movie search
-            $(".movie-body").empty()
+            clearMovie()
             //if checks for movie error
             if(e.Error){
                 failMovie(e)
@@ -44,19 +44,23 @@ function loadMovie(data){
                         "year" : data.Year,
                         "actors" : actors.split(", "),
                         "rating" : Math.round(data.imdbRating/2),
-                        "watched" : false
+                        "watched" : false,
+                        "poster" : data.Poster
                     }
     console.log(JSON.stringify(newMovieData))
     //appends card to html
-    $(".movie-body").append(`<div class="movie-card row col-md-4">
 
+    $(".movie-body").append(`<div class="movie-card row col-md-4">
                                 <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
                                 <div class="title"> ${data.Title}</div>
                                 <div class="year"> ${data.Year}</div>
                                 <div class="actors">Main Actors: ${data.Actors}</div>
                             </div>`)
         validateRating(data)
-        watchedCheckbox(data)
+        $(".movie-body").append(`<label for="watchedCheck">Check box if watched</label>
+            <input id="watchedCheck" type="checkbox" class="watched">
+            </button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`
+        )
         $('#movieTitle').val('').focus()
 
 }
@@ -71,16 +75,23 @@ function saveMovie(e){
         url: "https://movie-history-great-scott.firebaseio.com/.json",
         data: JSON.stringify(newMovieData)
     });
+    clearMovie()
 }
+
+function watched() {
+    var watchedChx = $('#watchedCheck')
+    console.log("newMovieData", newMovieData)
+    if (watchedChx.checked) {
+        newMovieData.watched = true
+    } else {
+        newMovieData.watched = false
+    }
+}
+
 
 $("body").click(function(e){
     // console.log(e)
-        if (e.target.id === "save-movie") {
-
-            // console.log('inside if')
-            saveMovie();
-        }
-        else if (e.target.id === "delete-movie") {
+       if (e.target.id === "delete-movie") {
             deleteMovie()
         }
     })
@@ -103,6 +114,15 @@ function myMovies(){
         populateMyMoviesPage(e) // <--send saved movies to function populateMyMoviesPage
 
         // console.log("your saved movies are:", e)
+
+$("body").on('click', '#save-movie', function(){
+    saveMovie()
+})
+
+$("body").on('click', '#watchedChecked', function(){
+    watched()
+})
+
 
 })
 
@@ -138,8 +158,8 @@ function validateRating(data){
     }
 }
 
-//Valdates the watch or un-watched checkbox
-function watchedCheckbox(data){
-    $(".movie-body").append(`<label>Check box if watched</label><button type="checkbox" class="watched"></button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
 
+function clearMovie(){
+    $(".movie-body").empty()
+    $('#movieTitle').val('').focus()
 }
