@@ -104,6 +104,14 @@ $("#search-movie").click(function(){
   });
 })
 
+$("body").on('click', '#save-movie', function(){
+    saveMovie()
+})
+
+$("body").on('click', '#watchedChecked', function(){
+    watched()
+})
+
 
 // go get saved  movies from firebase
 function myMovies(){
@@ -114,16 +122,6 @@ function myMovies(){
         populateMyMoviesPage(e) // <--send saved movies to function populateMyMoviesPage
 
         // console.log("your saved movies are:", e)
-
-$("body").on('click', '#save-movie', function(){
-    saveMovie()
-})
-
-$("body").on('click', '#watchedChecked', function(){
-    watched()
-})
-
-
 })
 
 }
