@@ -40,7 +40,7 @@ function loadMovie(data){
                         "year" : data.Year,
                         "actors" : actors.split(", "),
                         "rating" : Math.round(data.imdbRating/2),
-                        "watched" : false
+                        "watched" : false,
                         "poster" : data.Poster
                     }
     console.log(JSON.stringify(newMovieData))
@@ -52,7 +52,10 @@ function loadMovie(data){
                                 <div class="actors">Main Actors: ${data.Actors}</div>
                             </div>`)
         validateRating(data)
-        watchedCheckbox(data)
+        $(".movie-body").append(`<label for="watchedCheck">Check box if watched</label>
+            <input id="watchedCheck" type="checkbox" class="watched">
+            </button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`
+        )
         $('#movieTitle').val('').focus()
 
 }
