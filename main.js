@@ -127,14 +127,7 @@ $('.delete').click(() => console.log("delete"))
 
 function deleteMovie(e){
     console.log("delete")
-    // $.ajax({
-    //     accept: "application/json",
-    //     type: 'POST',
-    //     contentType: "application/json; charset=utf-8",
-    //     dataType: "json",
-    //     url: "https://movie-history-great-scott.firebaseio.com/.json",
-    //     data: JSON.stringify(newMovieData)
-    // };
+    /// AJAX CALL HERE TO DELETE
 }
 //Valdates if there is a number rating and rounds it
 function validateRating(data){
