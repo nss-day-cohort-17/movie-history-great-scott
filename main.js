@@ -40,7 +40,8 @@ function loadMovie(data){
                         "year" : data.Year,
                         "actors" : actors.split(", "),
                         "rating" : Math.round(data.imdbRating/2),
-                        "watched" : false
+                        "watched" : false,
+                        "poster" : data.Poster
                     }
     console.log(JSON.stringify(newMovieData))
     //appends card to html
@@ -51,7 +52,10 @@ function loadMovie(data){
                                 <div class="actors">Main Actors: ${data.Actors}</div>
                             </div>`)
         validateRating(data)
-        watchedCheckbox(data)
+        $(".movie-body").append(`<label for="watchedCheck">Check box if watched</label>
+            <input id="watchedCheck" type="checkbox" class="watched">
+            </button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`
+        )
         $('#movieTitle').val('').focus()
 
 }
@@ -70,14 +74,23 @@ function saveMovie(e){
     clearMovie()
 }
 
-$("body").click(function(e){
-    console.log(e)
-        if (e.target.id === "save-movie") {
-            console.log('inside if')
-            saveMovie();
-        }
-    })
+function watched() {
+    var watchedChx = $('#watchedCheck')
+    console.log("newMovieData", newMovieData)
+    if (watchedChx.checked) {
+        newMovieData.watched = true
+    } else {
+        newMovieData.watched = false
+    }
+}
 
+$("body").on('click', '#save-movie', function(){
+    saveMovie()
+})
+
+$("body").on('click', '#watchedChecked', function(){
+    watched()
+})
 
 
 //Valdates if there is a number rating and rounds it
@@ -89,11 +102,6 @@ function validateRating(data){
     }
 }
 
-//Valdates the watch or un-watched checkbox
-function watchedCheckbox(data){
-    $(".movie-body").append(`<label>Check box if watched</label><button type="checkbox" class="watched"></button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
-
-}
 
 function clearMovie(){
     $(".movie-body").empty()
