@@ -58,6 +58,24 @@ margin-left:2rem;
 
 }
 
+.myMovies {
+  /*font-size: 45rem;*/
+  display: none;
+  text-align: center;
+}
+.myMovies > .movie-card {
+  border: black solid 1px;
+    max-width: 50%;
+    min-width: 50%;
+    background-color: #e9ece5;
+
+    margin-left: 5.7rem;
+    overflow-y: scroll;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+}
+
 /*.year
 
 .actors

@@ -105,25 +105,18 @@ function myMovies(){
 }
 
 function populateMyMoviesPage(data) {
-console.log(data)
-// var myMData = Object.keys(data)
-// console.log(myMData)
-
+    console.log(data)
         for(var obj in data) {
+                $(".myMovies").append(`<div movie-card row col-md-4>
 
-             console.log(data[obj].actors)
+                                            <img src="${data[obj].poster}" alt="'{data[obj].title}'' movie poster" class="movie-poster">
+                                            <div class="title"> ${data[obj].title}</div>
+                                            <div class="year"> ${data[obj].year}</div>
+                                            <div class="actors">Main Actors: ${data[obj].actors}</div>
 
-// for (var i =0; i < data[obj].actors.length; i++) {
-//    console.log("actors:", data[obj].actors[i])
-// }
+                                    </div>`)
+
          }
-
-            // $(".myMovies").append(`<div movie-card row col-md-4>
-
-            //                     <div class="title"> ${[i].Title}</div>
-
-            //                 </div>`)
-
     }
 
 // }  end for loop
