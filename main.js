@@ -41,6 +41,7 @@ function loadMovie(data){
                         "actors" : actors.split(", "),
                         "rating" : Math.round(data.imdbRating/2),
                         "watched" : false
+                        "poster" : data.Poster
                     }
     console.log(JSON.stringify(newMovieData))
     //appends card to html
