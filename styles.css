@@ -27,20 +27,15 @@ body {
 }
 .movie-body {
    text-align: center;
-       padding-top: 15rem;
+    padding-top: 15rem;
 }
-.movie-card{
-
-    border: black solid 1px;
+/*.movie-card{
     max-width: 50%;
-    min-width: 50%;
+    border: black solid 1px;
     background-color: #e9ece5;
-
-    margin-left: 5.7rem;
-    overflow-y: scroll;
     margin-top: 2rem;
     margin-bottom: 2rem;
-}
+}*/
 
 
 /*card styles*/
@@ -59,24 +54,7 @@ margin-left:2rem;
 }
 
 .myMovies {
-  /*font-size: 45rem;*/
   display: none;
   text-align: center;
+  padding-top: 15rem;
 }
-.myMovies > .movie-card {
-  border: black solid 1px;
-    max-width: 50%;
-    min-width: 50%;
-    background-color: #e9ece5;
-
-    margin-left: 5.7rem;
-    overflow-y: scroll;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-
-}
-
-/*.year
-
-.actors
-.rating-of-5*/

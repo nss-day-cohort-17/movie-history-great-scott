@@ -40,6 +40,7 @@ function loadMovie(data){
     var actors = data.Actors
     newMovieData = {
                         "title" : data.Title,
+                        "poster" : data.Poster,
                         "year" : data.Year,
                         "actors" : actors.split(", "),
                         "rating" : Math.round(data.imdbRating/2),
@@ -47,7 +48,7 @@ function loadMovie(data){
                     }
     console.log(JSON.stringify(newMovieData))
     //appends card to html
-    $(".movie-body").append(`<div movie-card row col-md-4>
+    $(".movie-body").append(`<div class="movie-card row col-md-4">
 
                                 <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
                                 <div class="title"> ${data.Title}</div>
@@ -59,8 +60,7 @@ function loadMovie(data){
         $('#movieTitle').val('').focus()
 
 }
-
-// firebase: https://movie-history-great-scott.firebaseio.com/.json
+//saving the movie
 function saveMovie(e){
     // console.log("new log",newMovieData)
     $.ajax({
@@ -80,7 +80,11 @@ $("body").click(function(e){
             // console.log('inside if')
             saveMovie();
         }
+        else if (e.target.id === "delete-movie") {
+            deleteMovie()
+        }
     })
+
 //====my movie pages display/hide
 $("#search-movie").click(function(){
     $('.movie-body').hide()
@@ -89,7 +93,7 @@ $("#search-movie").click(function(){
   });
 })
 
-var myMoviesInFireBase;
+
 // go get saved  movies from firebase
 function myMovies(){
     // console.log("new log",newMovieData)
@@ -107,22 +111,31 @@ function myMovies(){
 function populateMyMoviesPage(data) {
     console.log(data)
         for(var obj in data) {
-                $(".myMovies").append(`<div movie-card row col-md-4>
-
+                $(".myMovies").append(`<div class="movie-card">
                                             <img src="${data[obj].poster}" alt="'{data[obj].title}'' movie poster" class="movie-poster">
                                             <div class="title"> ${data[obj].title}</div>
                                             <div class="year"> ${data[obj].year}</div>
                                             <div class="actors">Main Actors: ${data[obj].actors}</div>
+                                            <button id="delete-movie">Remove Movie</button>
 
                                     </div>`)
 
          }
     }
 
-// }  end for loop
+$('.delete').click(() => console.log("delete"))
 
-
-
+function deleteMovie(e){
+    console.log("delete")
+    // $.ajax({
+    //     accept: "application/json",
+    //     type: 'POST',
+    //     contentType: "application/json; charset=utf-8",
+    //     dataType: "json",
+    //     url: "https://movie-history-great-scott.firebaseio.com/.json",
+    //     data: JSON.stringify(newMovieData)
+    // };
+}
 //Valdates if there is a number rating and rounds it
 function validateRating(data){
     if(data.imdbRating ==="N/A"){
