@@ -16,12 +16,12 @@
 
 .car-msg-wrapper {
     position: absolute;;
-    margin-left: 82%;
+    margin-left: 76%;
     background-image: url(bubble-icon-with-text.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 100%;
-    padding-top:4%;
+    padding-top:3%;
     animation:3s;
     animation-name: carMsgBubble;
 }
@@ -73,7 +73,6 @@
 
 body {
   background-color: #e3e0cf;
-
 }
 
 .card-wrapper {
