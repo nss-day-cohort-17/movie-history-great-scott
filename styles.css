@@ -79,26 +79,24 @@ body {
   margin-top: 100px;
 }
 .movie-body {
-    padding: 15rem;
    text-align: center;
-    padding-top: 15rem;
+   padding-top: 6rem;
+   display: flex;
+   justify-content: center;
 }
-/*.movie-card{
-    max-width: 50%;
+.movie-card{
+    padding-top: 2rem;
     border: black solid 1px;
     background-color: #e9ece5;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-
+    margin: 2rem 2rem;
+    box-shadow: 0px 0px 10px black;
+    padding-bottom: 2rem;
+    border-radius: 5px;
 }
 .movie-poster{
     max-height: 21em;
-    max-width: 21em;
+    max-width: 15em;
 }
-
-}*/
-
-
 
 /*card styles*/
 .watched {
@@ -106,7 +104,7 @@ body {
   padding-top: 1rem;
 }
 .title {
-  font-size: 4rem;
+  font-size: 2rem;
 }
 
 
@@ -116,10 +114,20 @@ margin-left:2rem;
 }
 
 .myMovies {
-  display: none;
+  display: flex;
+  flex-wrap: wrap;
   text-align: center;
   padding-top: 15rem;
+  margin: auto;
+  justify-content: center;
 }
  .hidden {
   display: none;
+ }
+
+ header{
+    padding: 10px;
+    background-color: rgba(205, 211, 211, .9);
+    box-shadow: 0px 5px 10px white;
+    border-radius: 10px;
  }
