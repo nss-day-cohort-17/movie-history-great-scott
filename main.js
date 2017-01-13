@@ -172,6 +172,11 @@ function clearMovie(){
     $('#movieTitle').val('').focus()
 }
 
+function showAdd() {
+    $(".myMovies").addClass("hidden")
+    $(".movie-body").removeClass("hidden")
+}
+
 
 
 /*******************
@@ -181,6 +186,7 @@ Event Handlers
 $('#new-movie').click(function(){
      // $('.main').show()
     getMovie()
+    showAdd()
 })
 
 $("body").click(function(e){
