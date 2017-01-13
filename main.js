@@ -159,8 +159,6 @@ $("body").click(function(e){
        if (e.target.id === "delete-movie") {
             deleteMovie()
         }
-
-        carMovement()
 })
 
 
@@ -228,13 +226,11 @@ function clearMovie(){
 }
 
 //adds and removes animation class after animation is finished
-function carMovement(){
-    $('body :button').click(()=>{
-        $('.hidden-del').addClass('delorean').removeClass('hidden');
-        $('.car-msg-wrapper').removeClass('hidden')
-        $(".hidden-del").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',()=> {
-            $(".hidden-del").removeClass('delorean').addClass('hidden');
-            $(".car-msg-wrapper").addClass("hidden");
-        });
+$('body :button').click(()=>{
+    $('.hidden-del').addClass('delorean').removeClass('hidden');
+    $('.car-msg-wrapper').removeClass('hidden')
+    $(".hidden-del").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',()=> {
+        $(".hidden-del").removeClass('delorean').addClass('hidden');
+        $(".car-msg-wrapper").addClass("hidden");
     });
-}
+});
