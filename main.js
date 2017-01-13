@@ -3,7 +3,7 @@ var newMovieData = {}
 
 function getMovie(){
     var movieTitle = $('#movieTitle').val()
-    console.log(movieTitle)
+    // console.log(movieTitle)
 
     //grabbing API JSON
  $.ajax({url:`https://www.omdbapi.com/?t=${movieTitle}=&plot=full&r=json`})
@@ -21,7 +21,10 @@ function getMovie(){
         .fail(failMovie)
 }
 
-$('#new-movie').click(getMovie)
+$('#new-movie').click(function(){
+     $('.movie-body').show()
+    getMovie()
+})
 
 function failMovie(data){
 
@@ -36,27 +39,35 @@ function loadMovie(data){
     var actors = data.Actors
     newMovieData = {
                         "title" : data.Title,
+                        "poster" : data.Poster,
                         "year" : data.Year,
                         "actors" : actors.split(", "),
                         "rating" : Math.round(data.imdbRating/2),
-                        "watched" : false
+                        "watched" : false,
+                        "poster" : data.Poster
                     }
     console.log(JSON.stringify(newMovieData))
     //appends card to html
-    $(".movie-body").append(`<div movie-card row col-md-4>
+
+    $(".movie-body").append(`<div class="movie-card row col-md-4">
                                 <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
                                 <div class="title"> ${data.Title}</div>
                                 <div class="year"> ${data.Year}</div>
                                 <div class="actors">Main Actors: ${data.Actors}</div>
                             </div>`)
         validateRating(data)
-        watchedCheckbox(data)
+
+        $(".movie-body").append(`<label for="watchedCheck">Check box if watched</label>
+            <input id="watchedCheck" type="checkbox" class="watched">
+            </button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`
+        )
+        $('#movieTitle').val('').focus()
+
 
 }
-
-// firebase: https://movie-history-great-scott.firebaseio.com/.json
+//saving the movie
 function saveMovie(e){
-    console.log("new log",newMovieData)
+    // console.log("new log",newMovieData)
     $.ajax({
         accept: "application/json",
         type: 'POST',
@@ -68,14 +79,79 @@ function saveMovie(e){
     clearMovie()
 }
 
+function watched() {
+    var watchedChx = $('#watchedCheck')
+    console.log("newMovieData", newMovieData)
+    if (watchedChx.checked) {
+        newMovieData.watched = true
+    } else {
+        newMovieData.watched = false
+    }
+}
+
+
 $("body").click(function(e){
-    console.log(e)
-        if (e.target.id === "save-movie") {
-            console.log('inside if')
-            saveMovie();
+    // console.log(e)
+       if (e.target.id === "delete-movie") {
+            deleteMovie()
         }
+
         carMovement()
 })
+
+
+//====my movie pages display/hide
+$("#search-movie").click(function(){
+    $('.movie-body').hide()
+    $( ".myMovies" ).show( "slow", function() {
+            myMovies()
+  });
+})
+
+$("body").on('click', '#save-movie', function(){
+    saveMovie()
+})
+
+$("body").on('click', '#watchedChecked', function(){
+    watched()
+})
+
+
+// go get saved  movies from firebase
+function myMovies(){
+    // console.log("new log",newMovieData)
+    $.ajax({url: "https://movie-history-great-scott.firebaseio.com/.json"})
+        .done(function(e) {
+
+        populateMyMoviesPage(e) // <--send saved movies to function populateMyMoviesPage
+
+        // console.log("your saved movies are:", e)
+})
+
+}
+
+function populateMyMoviesPage(data) {
+    console.log(data)
+        for(var obj in data) {
+                $(".myMovies").append(`<div class="movie-card">
+                                            <img src="${data[obj].poster}" alt="'{data[obj].title}'' movie poster" class="movie-poster">
+                                            <div class="title"> ${data[obj].title}</div>
+                                            <div class="year"> ${data[obj].year}</div>
+                                            <div class="actors">Main Actors: ${data[obj].actors}</div>
+                                            <button id="delete-movie">Remove Movie</button>
+
+                                    </div>`)
+
+         }
+    }
+
+$('.delete').click(() => console.log("delete"))
+
+function deleteMovie(e){
+    console.log("delete")
+    /// AJAX CALL HERE TO DELETE
+}
+
 //Valdates if there is a number rating and rounds it
 function validateRating(data){
     if(data.imdbRating ==="N/A"){
@@ -85,10 +161,7 @@ function validateRating(data){
     }
 }
 
-//Valdates the watch or un-watched checkbox
-function watchedCheckbox(data){
-    $(".movie-body").append(`<label>Check box if watched</label><button type="checkbox" class="watched"></button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
-}
+
 //clear movie
 function clearMovie(){
     $(".movie-body").empty()

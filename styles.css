@@ -83,24 +83,23 @@ body {
 .movie-body {
     padding: 15rem;
    text-align: center;
-       padding-top: 15rem;
+    padding-top: 15rem;
 }
-.movie-card{
-
-    border: black solid 1px;
+/*.movie-card{
     max-width: 50%;
-    min-width: 50%;
+    border: black solid 1px;
     background-color: #e9ece5;
-
-    margin-left: 5.7rem;
-    overflow-y: scroll;
     margin-top: 2rem;
     margin-bottom: 2rem;
+
 }
 .movie-poster{
     max-height: 21em;
     max-width: 21em;
 }
+
+}*/
+
 
 
 /*card styles*/
@@ -118,7 +117,8 @@ margin-left:2rem;
 
 }
 
-/*.year
-
-.actors
-.rating-of-5*/
+.myMovies {
+  display: none;
+  text-align: center;
+  padding-top: 15rem;
+}
