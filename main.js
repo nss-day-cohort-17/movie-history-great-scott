@@ -88,7 +88,6 @@ function getMovie(){
             }
         })
         .fail(failMovie)
-
 }
 
 $('#new-movie').click(function(){
@@ -126,11 +125,14 @@ function loadMovie(data){
                                 <div class="actors">Main Actors: ${data.Actors}</div>
                             </div>`)
         validateRating(data)
+
         $(".movie-card").append(`<label for="watchedCheck">Check box if watched</label>
+
             <input id="watchedCheck" type="checkbox" class="watched">
             </button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`
         )
         $('#movieTitle').val('').focus()
+
 
 }
 //saving the movie
@@ -163,7 +165,10 @@ $("body").click(function(e){
        if (e.target.id === "delete-movie") {
             deleteMovie()
         }
-    })
+
+        carMovement()
+})
+
 
 //====my movie pages display/hide
 $("#search-movie").click(function(){
@@ -216,6 +221,7 @@ function deleteMovie(e){
     console.log("delete")
     /// AJAX CALL HERE TO DELETE
 }
+
 //Valdates if there is a number rating and rounds it
 function validateRating(data){
     if(data.imdbRating ==="N/A"){
@@ -226,7 +232,20 @@ function validateRating(data){
 }
 
 
+//clear movie
 function clearMovie(){
     $(".movie-body").empty()
     $('#movieTitle').val('').focus()
+}
+
+//adds and removes animation class after animation is finished
+function carMovement(){
+    $('body :button').click(()=>{
+        $('.hidden-del').addClass('delorean');
+        $('.car-msg-wrapper').removeClass('hidden')
+        $(".hidden-del").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',()=> {
+            $(".hidden-del").removeClass('delorean');
+            $(".car-msg-wrapper").addClass("hidden");
+        });
+    });
 }
