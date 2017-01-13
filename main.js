@@ -72,22 +72,20 @@ var newMovieData = {}
 
 function getMovie(){
     var movieTitle = $('#movieTitle').val()
-    // console.log(movieTitle)
-
     //grabbing API JSON
  $.ajax({url:`https://www.omdbapi.com/?t=${movieTitle}=&plot=full&r=json`})
-        .done(function(e) {
-            //reset movie search
-            clearMovie()
-            //if checks for movie error
-            if(e.Error){
-                failMovie(e)
-            //else uses vaild movie info
-            }else{
-                loadMovie(e)
-            }
-        })
-        .fail(failMovie)
+    .done(function(e) {
+        //reset movie search
+        clearMovie()
+        //if checks for movie error
+        if(e.Error){
+            failMovie(e)
+        //else uses vaild movie info
+        }else{
+            loadMovie(e)
+        }
+    })
+    .fail(failMovie)
 }
 
 $('#new-movie').click(function(){
@@ -104,7 +102,6 @@ function failMovie(data){
 
 //Loads movie card with basic info about movie
 function loadMovie(data){
-
     var actors = data.Actors
     newMovieData = {
                         "title" : data.Title,
@@ -117,7 +114,6 @@ function loadMovie(data){
                     }
     console.log(JSON.stringify(newMovieData))
     //appends card to html
-
     $(".movie-body").append(`<div class="movie-card row col-md-4">
                                 <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
                                 <div class="title"> ${data.Title}</div>
@@ -129,11 +125,9 @@ function loadMovie(data){
         $(".movie-card").append(`<label for="watchedCheck">Check box if watched</label>
 
             <input id="watchedCheck" type="checkbox" class="watched">
-            </button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`
-        )
+            </button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
+
         $('#movieTitle').val('').focus()
-
-
 }
 //saving the movie
 function saveMovie(e){
@@ -174,7 +168,7 @@ $("body").click(function(e){
 $("#search-movie").click(function(){
     $('.movie-body').hide()
     $( ".myMovies" ).show( "slow", function() {
-            myMovies()
+        myMovies()
   });
 })
 
@@ -192,12 +186,9 @@ function myMovies(){
     // console.log("new log",newMovieData)
     $.ajax({url: "https://movie-history-great-scott.firebaseio.com/.json"})
         .done(function(e) {
-
         populateMyMoviesPage(e) // <--send saved movies to function populateMyMoviesPage
-
         // console.log("your saved movies are:", e)
-})
-
+    })
 }
 
 function populateMyMoviesPage(data) {
@@ -209,11 +200,9 @@ function populateMyMoviesPage(data) {
                                             <div class="year"> ${data[obj].year}</div>
                                             <div class="actors">Main Actors: ${data[obj].actors}</div>
                                             <button id="delete-movie">Remove Movie</button>
-
                                     </div>`)
-
          }
-    }
+}
 
 $('.delete').click(() => console.log("delete"))
 
@@ -241,10 +230,10 @@ function clearMovie(){
 //adds and removes animation class after animation is finished
 function carMovement(){
     $('body :button').click(()=>{
-        $('.hidden-del').addClass('delorean');
+        $('.hidden-del').addClass('delorean').removeClass('hidden');
         $('.car-msg-wrapper').removeClass('hidden')
         $(".hidden-del").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',()=> {
-            $(".hidden-del").removeClass('delorean');
+            $(".hidden-del").removeClass('delorean').addClass('hidden');
             $(".car-msg-wrapper").addClass("hidden");
         });
     });
