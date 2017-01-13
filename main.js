@@ -114,7 +114,7 @@ function loadMovie(data){
                     }
     console.log(JSON.stringify(newMovieData))
     //appends card to html
-    $(".movie-body").append(`<div class="movie-card">
+    $(".movie-body").append(`<div class="movie-card col-md-5">
                                 <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
                                 <div class="title"> ${data.Title}</div>
                                 <div class="year"> ${data.Year}</div>
@@ -192,7 +192,7 @@ function myMovies(){
 function populateMyMoviesPage(data) {
     console.log(data)
         for(var obj in data) {
-                $(".myMovies").append(`<div class="movie-card col-md-4">
+                $(".myMovies").append(`<div class="movie-card col-md-3">
                                             <img src="${data[obj].poster}" alt="'{data[obj].title}'' movie poster" class="movie-poster">
                                             <div class="title"> ${data[obj].title}</div>
                                             <div class="year"> ${data[obj].year}</div>
