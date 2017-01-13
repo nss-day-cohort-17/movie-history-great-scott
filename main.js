@@ -23,7 +23,7 @@ firebase.auth().onAuthStateChanged(() => {
     $("#loginPage").addClass('hidden')
     $(".main ").removeClass('hidden')
     $('.main  h1').text(`Welcome ${email}`)
-
+    uid = firebase.auth().currentUser.uid
   }
   else {
       $("#loginPage").removeClass('hidden')
@@ -32,18 +32,19 @@ firebase.auth().onAuthStateChanged(() => {
 })
 
 
-
 /*******************
 Global Variable Declarations
 *******************/
 
 var newMovieData = {}
+var uid
 
 
 
 /*******************
 Functions
 *******************/
+
 
 function getMovie(){
     var movieTitle = $('#movieTitle').val()
@@ -102,15 +103,12 @@ function loadMovie(data){
 }
 //saving the movie
 function saveMovie(e){
-    // console.log("new log",newMovieData)
-    $.ajax({
-        accept: "application/json",
-        type: 'POST',
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        url: "https://movie-history-great-scott.firebaseio.com/.json",
-        data: JSON.stringify(newMovieData)
-    });
+    //SAVE MOVIE OBJECT AS VAR
+    console.log(uid)
+    console.log(newMovieData);
+    $.post(`https://movie-history-great-scott.firebaseio.com/${uid}.json`,
+        JSON.stringify({movie : newMovieData})
+    ).then(console.log)
     clearMovie()
 }
 
@@ -124,13 +122,10 @@ function watched() {
     }
 }
 
-
-
-
 // go get saved  movies from firebase
 function myMovies(){
     // console.log("new log",newMovieData)
-    $.ajax({url: "https://movie-history-great-scott.firebaseio.com/.json"})
+    $.ajax({url: `https://movie-history-great-scott.firebaseio.com/${uid}.json`})
         .done(function(e) {
         populateMyMoviesPage(e) // <--send saved movies to function populateMyMoviesPage
         // console.log("your saved movies are:", e)
@@ -140,16 +135,15 @@ function myMovies(){
 function populateMyMoviesPage(data) {
     console.log(data)
         for(var obj in data) {
-                $(".myMovies").append(`<div class="movie-card col-md-3">
-                                            <img src="${data[obj].poster}" alt="'{data[obj].title}'' movie poster" class="movie-poster">
-                                            <div class="title"> ${data[obj].title}</div>
-                                            <div class="year"> ${data[obj].year}</div>
-                                            <div class="actors">Main Actors: ${data[obj].actors}</div>
-                                            <button id="delete-movie">Remove Movie</button>
+                $(".myMovies").append(`<div class="movie-card col-md-3" id="${obj}">
+                                            <img src="${data[obj].movie.poster}" alt="'{data[obj].movie.title}'' movie poster" class="movie-poster">
+                                            <div class="title"> ${data[obj].movie.title}</div>
+                                            <div class="year"> ${data[obj].movie.year}</div>
+                                            <div class="actors">Main Actors: ${data[obj].movie.actors}</div>
+                                            <button class="delete-movie">Remove Movie</button>
                                     </div>`)
          }
 }
-
 
 function deleteMovie(e){
     console.log("delete")
@@ -169,6 +163,7 @@ function validateRating(data){
 //clear movie
 function clearMovie(){
     $(".movie-body").empty()
+    $(".myMovies").empty()
     $('#movieTitle').val('').focus()
 }
 
@@ -248,3 +243,23 @@ $('#register').click((e) => {
     })
     e.preventDefault()
 });
+
+$("body").click(function(e){
+    // console.log(e)
+       if (e.target.id === "delete-movie") {
+            deleteMovie()
+        }
+})
+
+$('body').on("click", ".delete-movie", (e) => {
+    var parentId =e.target.parentNode.id
+    $.ajax({
+        url: `https://movie-history-great-scott.firebaseio.com/${uid}/${parentId}.json`,
+        type:'DELETE'
+    })
+        .done(function(e) {
+        clearMovie()
+        myMovies() // <--send saved movies to function populateMyMoviesPage
+        // console.log("your saved movies are:", e)
+    })
+})
