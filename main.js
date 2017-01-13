@@ -63,10 +63,6 @@ function getMovie(){
     .fail(failMovie)
 }
 
-$('#new-movie').click(function(){
-     // $('.main').show()
-    getMovie()
-})
 
 function failMovie(data){
 
@@ -129,29 +125,6 @@ function watched() {
 }
 
 
-$("body").click(function(e){
-    // console.log(e)
-       if (e.target.id === "delete-movie") {
-            deleteMovie()
-        }
-})
-
-
-//====my movie pages display/hide
-$("#search-movie").click(function(){
-    $('.movie-body').hide()
-    $( ".myMovies" ).show( "slow", function() {
-        myMovies()
-  });
-})
-
-$("body").on('click', '#save-movie', function(){
-    saveMovie()
-})
-
-$("body").on('click', '#watchedChecked', function(){
-    watched()
-})
 
 
 // go get saved  movies from firebase
@@ -177,7 +150,6 @@ function populateMyMoviesPage(data) {
          }
 }
 
-$('.delete').click(() => console.log("delete"))
 
 function deleteMovie(e){
     console.log("delete")
@@ -200,6 +172,40 @@ function clearMovie(){
     $('#movieTitle').val('').focus()
 }
 
+
+
+/*******************
+Event Handlers
+*******************/
+
+$('#new-movie').click(function(){
+     // $('.main').show()
+    getMovie()
+})
+
+$("body").click(function(e){
+    // console.log(e)
+       if (e.target.id === "delete-movie") {
+            deleteMovie()
+        }
+})
+
+//====my movie pages display/hide
+$("#search-movie").click(function(){
+    $('.movie-body').hide()
+    $( ".myMovies" ).show( "slow", function() {
+        myMovies()
+  });
+})
+
+$("body").on('click', '#save-movie', function(){
+    saveMovie()
+})
+
+$("body").on('click', '#watchedChecked', function(){
+    watched()
+})
+
 //adds and removes animation class after animation is finished
 $('body :button').click(()=>{
     $('.hidden-del').addClass('delorean').removeClass('hidden');
@@ -208,4 +214,31 @@ $('body :button').click(()=>{
         $(".hidden-del").removeClass('delorean').addClass('hidden');
         $(".car-msg-wrapper").addClass("hidden");
     });
+});
+
+//logout
+$('#logout').click(() => {
+  firebase.auth().signOut()
+});
+
+//login when hit login button
+$('#loginPage form').submit((e) => {
+    var email = $('#userEmail').val()
+    var password=$('#userPassword').val()
+    firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+        $('form')[0].reset()
+    })
+    e.preventDefault()
+});
+
+$('.delete').click(() => console.log("delete"))
+
+//register
+$('#register').click((e) => {
+    var email = $('#userEmail').val()
+    var password=$('#userPassword').val()
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+        $('form')[0].reset()
+    })
+    e.preventDefault()
 });
