@@ -167,7 +167,7 @@ $("body").click(function(e){
 
 //====my movie pages display/hide
 $("#search-movie").click(function(){
-    // $('.movie-body').hide()
+    $('.movie-body').hide()
     $( ".myMovies" ).show( "slow", function() {
             myMovies()
   });
@@ -227,6 +227,6 @@ function validateRating(data){
 
 
 function clearMovie(){
-    // $(".movie-body").empty()
+    $(".movie-body").empty()
     $('#movieTitle').val('').focus()
 }
