@@ -114,7 +114,7 @@ function loadMovie(data){
                     }
     console.log(JSON.stringify(newMovieData))
     //appends card to html
-    $(".movie-body").append(`<div class="movie-card row col-md-4">
+    $(".movie-body").append(`<div class="movie-card">
                                 <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
                                 <div class="title"> ${data.Title}</div>
                                 <div class="year"> ${data.Year}</div>
@@ -194,7 +194,7 @@ function myMovies(){
 function populateMyMoviesPage(data) {
     console.log(data)
         for(var obj in data) {
-                $(".myMovies").append(`<div class="movie-card">
+                $(".myMovies").append(`<div class="movie-card col-md-4">
                                             <img src="${data[obj].poster}" alt="'{data[obj].title}'' movie poster" class="movie-poster">
                                             <div class="title"> ${data[obj].title}</div>
                                             <div class="year"> ${data[obj].year}</div>
@@ -214,9 +214,9 @@ function deleteMovie(e){
 //Valdates if there is a number rating and rounds it
 function validateRating(data){
     if(data.imdbRating ==="N/A"){
-        $(".movie-body").append(`<div class="rating-of-5">No ranking found</div>`)
+        $(".movie-card").append(`<div class="rating-of-5">No ranking found</div>`)
     }else{
-        $(".movie-body").append(`<div class="rating-of-5">Rating: ${Math.round(data.imdbRating/2)}</div>`)
+        $(".movie-card").append(`<div class="rating-of-5">Rating: ${Math.round(data.imdbRating/2)}</div>`)
     }
 }
 
