@@ -31,57 +31,19 @@ firebase.auth().onAuthStateChanged(() => {
     }
 })
 
-//logout
-$('#logout').click(() => {
-  firebase.auth().signOut()
-});
-
-//login when hit login button
-$('#loginPage form').submit((e) => {
- var email = $('#userEmail').val()
- var password=$('#userPassword').val()
 
 
-
-  firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
-      $('form')[0].reset()
-     })
-e.preventDefault()
-});
-
-//register
-$('#register').click((e) => {
-
-var email = $('#userEmail').val()
- var password=$('#userPassword').val()
-
-  firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
-      $('form')[0].reset()
-     })
-e.preventDefault()
-});
-
-
-
-
-//adding items to  firebase
-// //
-// $('#save-movie').submit((e) => {
-//     var uid = firebase.auth().currentUser.uid
-// //SAVE MOVIE OBJECT AS VAR
-
-//     // var task = $('.movie-page input[type="text"]').val()
-
-//   $.post(`https://auth-proj-a6516.firebaseio.com/${uid}.json`,
-//   JSON.stringify({ //task: task})
-//   ).then(console.log)
-
-//   e.preventDefault()
-
-// })
-
+/*******************
+Global Variable Declarations
+*******************/
 
 var newMovieData = {}
+
+
+
+/*******************
+Functions
+*******************/
 
 function getMovie(){
     var movieTitle = $('#movieTitle').val()
