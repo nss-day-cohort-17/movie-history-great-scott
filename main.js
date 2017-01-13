@@ -1,3 +1,72 @@
+// firebase
+
+  firebase.initializeApp(
+    // Initialize Firebase
+{
+    apiKey: "AIzaSyBK4Liq6H97r8LIEYpr3hyqR4l77zkrQXI",
+    authDomain: "movie-history-great-scott.firebaseapp.com",
+    databaseURL: "https://movie-history-great-scott.firebaseio.com",
+    storageBucket: "movie-history-great-scott.appspot.com",
+    messagingSenderId: "176272090400"
+
+  });
+
+//check logged in status
+
+//listens for changes  from login/signout
+firebase.auth().onAuthStateChanged(() => {
+  if (firebase.auth().currentUser != null) {
+  //logged in
+  var email = firebase.auth().currentUser.email
+    $("#loginPage").addClass('hidden')
+    $(".main ").removeClass('hidden')
+    $('.main  h1').text(`Welcome ${email}`)
+
+  }
+  else {
+      $("#loginPage").removeClass('hidden')
+      $(".main").addClass('hidden')
+    }
+})
+
+//logout
+$('#logout').click(() => {
+  firebase.auth().signOut()
+
+});
+
+//login when hit login button
+$('#loginPage form').submit((e) => {
+ var email = $('#userEmail').val()
+ var password=$('#userPassword').val()
+
+
+ firebase.auth().createUserWithEmailAndPassword(email, password)
+     firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+      $('form')[0].reset()
+     })
+e.preventDefault()
+});
+
+
+
+
+//adding items to  firebase
+// //
+// $('#save-movie').submit((e) => {
+//     var uid = firebase.auth().currentUser.uid
+// //SAVE MOVIE OBJECT AS VAR
+
+//     // var task = $('.movie-page input[type="text"]').val()
+
+//   $.post(`https://auth-proj-a6516.firebaseio.com/${uid}.json`,
+//   JSON.stringify({ //task: task})
+//   ).then(console.log)
+
+//   e.preventDefault()
+
+// })
+
 
 var newMovieData = {}
 
@@ -23,7 +92,7 @@ function getMovie(){
 }
 
 $('#new-movie').click(function(){
-     $('.movie-body').show()
+     // $('.main').show()
     getMovie()
 })
 
@@ -57,7 +126,7 @@ function loadMovie(data){
                                 <div class="actors">Main Actors: ${data.Actors}</div>
                             </div>`)
         validateRating(data)
-        $(".movie-body").append(`<label for="watchedCheck">Check box if watched</label>
+        $(".movie-card").append(`<label for="watchedCheck">Check box if watched</label>
             <input id="watchedCheck" type="checkbox" class="watched">
             </button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`
         )
@@ -98,7 +167,7 @@ $("body").click(function(e){
 
 //====my movie pages display/hide
 $("#search-movie").click(function(){
-    $('.movie-body').hide()
+    // $('.movie-body').hide()
     $( ".myMovies" ).show( "slow", function() {
             myMovies()
   });
@@ -158,6 +227,6 @@ function validateRating(data){
 
 
 function clearMovie(){
-    $(".movie-body").empty()
+    // $(".movie-body").empty()
     $('#movieTitle').val('').focus()
 }
