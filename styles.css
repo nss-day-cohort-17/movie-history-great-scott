@@ -121,3 +121,6 @@ margin-left:2rem;
   text-align: center;
   padding-top: 15rem;
 }
+ .hidden {
+  display: none;
+ }
