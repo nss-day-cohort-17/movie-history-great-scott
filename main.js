@@ -1,4 +1,6 @@
-// firebase
+/*******************
+Firebase
+*******************/
 
   firebase.initializeApp(
     // Initialize Firebase
