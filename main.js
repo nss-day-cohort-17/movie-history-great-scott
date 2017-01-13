@@ -145,11 +145,6 @@ function populateMyMoviesPage(data) {
          }
 }
 
-function deleteMovie(e){
-    console.log("delete")
-    /// AJAX CALL HERE TO DELETE
-}
-
 //Valdates if there is a number rating and rounds it
 function validateRating(data){
     if(data.imdbRating ==="N/A"){
@@ -163,7 +158,6 @@ function validateRating(data){
 //clear movie
 function clearMovie(){
     $(".movie-body").empty()
-    $(".myMovies").empty()
     $('#movieTitle').val('').focus()
 }
 
@@ -184,30 +178,24 @@ $('#new-movie').click(function(){
     showAdd()
 })
 
-$("body").click(function(e){
-    // console.log(e)
-       if (e.target.id === "delete-movie") {
-            deleteMovie()
-        }
-})
-
 //====my movie pages display/hide
 $("#search-movie").click(function(){
-    $('.movie-body').hide()
-    $( ".myMovies" ).show( "slow", function() {
-        myMovies()
-  });
+    $('.movie-body').addClass('hidden')
+    $( ".myMovies" ).removeClass('hidden')
+    myMovies()
 })
 
+// save movie button
 $("body").on('click', '#save-movie', function(){
     saveMovie()
 })
 
+// watched checkbox
 $("body").on('click', '#watchedChecked', function(){
     watched()
 })
 
-//adds and removes animation class after animation is finished
+//adds and removes delorean animation class after animation is finished
 $('body :button').click(()=>{
     $('.hidden-del').addClass('delorean').removeClass('hidden');
     $('.car-msg-wrapper').removeClass('hidden')
@@ -232,7 +220,6 @@ $('#loginPage form').submit((e) => {
     e.preventDefault()
 });
 
-$('.delete').click(() => console.log("delete"))
 
 //register
 $('#register').click((e) => {
@@ -244,12 +231,6 @@ $('#register').click((e) => {
     e.preventDefault()
 });
 
-$("body").click(function(e){
-    // console.log(e)
-       if (e.target.id === "delete-movie") {
-            deleteMovie()
-        }
-})
 
 $('body').on("click", ".delete-movie", (e) => {
     var parentId =e.target.parentNode.id
@@ -258,7 +239,7 @@ $('body').on("click", ".delete-movie", (e) => {
         type:'DELETE'
     })
         .done(function(e) {
-        clearMovie()
+        $(".myMovies").empty()
         myMovies() // <--send saved movies to function populateMyMoviesPage
         // console.log("your saved movies are:", e)
     })
