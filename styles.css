@@ -14,14 +14,69 @@
   margin-top: 3px;
 }
 
+.car-msg-wrapper {
+    position: absolute;;
+    margin-left: 82%;
+    background-image: url(bubble-icon-with-text.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    padding-top:4%;
+    animation:3s;
+    animation-name: carMsgBubble;
+}
 
+.delorean {
+    position: absolute;
+    max-height: 100px;
+    max-width: 140px;
+    left: 0%;
+    margin: 7em -244px;
+    margin-top: 0;
+    padding-top: 0;
+    animation: 5s;
+    animation-name: slideLeft;
+}
+/*animation for the delorean*/
+@keyframes slideLeft {
+    0% {
+        animation-timing-function: ease-in;
+        left: 150%;
+    }
+    40% {
+        left: 100%;
+    }
+    60%{
+        left: 100%;
+    }
+    80% {
+        left: 0%;
+    }
+    100% {
+        left: -150%
+    }
+}
+/*animation for the message bubble*/
+@keyframes carMsgBubble {
+    0% {
+        left: 150%;
+    }
+    60%{
+        left: 100%;
+    }
+    80%{
+        left:150%;
+    }
+}
 
 /*body styles*/
 
 body {
   background-color: #e3e0cf;
+  overflow: hidden;
 
 }
+
 .card-wrapper {
   margin-top: 100px;
 }
@@ -36,7 +91,15 @@ body {
     background-color: #e9ece5;
     margin-top: 2rem;
     margin-bottom: 2rem;
+
+}
+.movie-poster{
+    max-height: 21em;
+    max-width: 21em;
+}
+
 }*/
+
 
 
 /*card styles*/
