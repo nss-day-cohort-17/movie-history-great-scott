@@ -1,5 +1,7 @@
-var uid;
-// firebase
+/*******************
+Firebase
+*******************/
+
   firebase.initializeApp(
     // Initialize Firebase
 {
@@ -29,27 +31,20 @@ firebase.auth().onAuthStateChanged(() => {
     }
 })
 
-//logout
-$('#logout').click(() => {
-  firebase.auth().signOut()
 
-});
+/*******************
+Global Variable Declarations
+*******************/
 
-//login when hit login button
-$('#loginPage form').submit((e) => {
- var email = $('#userEmail').val()
- var password=$('#userPassword').val()
-
-
- firebase.auth().createUserWithEmailAndPassword(email, password)
-     firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
-      $('form')[0].reset()
-     })
-e.preventDefault()
-});
-
-//adding items to  firebase
 var newMovieData = {}
+var uid
+
+
+
+/*******************
+Functions
+*******************/
+
 
 function getMovie(){
     var movieTitle = $('#movieTitle').val()
@@ -69,10 +64,6 @@ function getMovie(){
     .fail(failMovie)
 }
 
-$('#new-movie').click(function(){
-     // $('.main').show()
-    getMovie()
-})
 
 function failMovie(data){
 
@@ -131,32 +122,6 @@ function watched() {
     }
 }
 
-
-$("body").click(function(e){
-    // console.log(e)
-       if (e.target.id === "delete-movie") {
-            deleteMovie()
-        }
-})
-
-
-//====my movie pages display/hide
-$("#search-movie").click(function(){
-    $('.movie-body').hide()
-    $( ".myMovies" ).show( "slow", function() {
-        myMovies()
-  });
-})
-
- $("body").on('click', '#save-movie', function(){
-     saveMovie()
- })
-
-$("body").on('click', '#watchedChecked', function(){
-    watched()
-})
-
-
 // go get saved  movies from firebase
 function myMovies(){
     // console.log("new log",newMovieData)
@@ -180,19 +145,6 @@ function populateMyMoviesPage(data) {
          }
 }
 
-$('body').on("click", ".delete-movie", (e) => {
-    var parentId =e.target.parentNode.id
-    $.ajax({
-        url: `https://movie-history-great-scott.firebaseio.com/${uid}/${parentId}.json`,
-        type:'DELETE'
-    })
-        .done(function(e) {
-        clearMovie()
-        myMovies() // <--send saved movies to function populateMyMoviesPage
-        // console.log("your saved movies are:", e)
-    })
-})
-
 function deleteMovie(e){
     console.log("delete")
     /// AJAX CALL HERE TO DELETE
@@ -215,6 +167,46 @@ function clearMovie(){
     $('#movieTitle').val('').focus()
 }
 
+function showAdd() {
+    $(".myMovies").addClass("hidden")
+    $(".movie-body").removeClass("hidden")
+}
+
+
+
+/*******************
+Event Handlers
+*******************/
+
+$('#new-movie').click(function(){
+     // $('.main').show()
+    getMovie()
+    showAdd()
+})
+
+$("body").click(function(e){
+    // console.log(e)
+       if (e.target.id === "delete-movie") {
+            deleteMovie()
+        }
+})
+
+//====my movie pages display/hide
+$("#search-movie").click(function(){
+    $('.movie-body').hide()
+    $( ".myMovies" ).show( "slow", function() {
+        myMovies()
+  });
+})
+
+$("body").on('click', '#save-movie', function(){
+    saveMovie()
+})
+
+$("body").on('click', '#watchedChecked', function(){
+    watched()
+})
+
 //adds and removes animation class after animation is finished
 $('body :button').click(()=>{
     $('.hidden-del').addClass('delorean').removeClass('hidden');
@@ -224,3 +216,50 @@ $('body :button').click(()=>{
         $(".car-msg-wrapper").addClass("hidden");
     });
 });
+
+//logout
+$('#logout').click(() => {
+  firebase.auth().signOut()
+});
+
+//login when hit login button
+$('#loginPage form').submit((e) => {
+    var email = $('#userEmail').val()
+    var password=$('#userPassword').val()
+    firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+        $('form')[0].reset()
+    })
+    e.preventDefault()
+});
+
+$('.delete').click(() => console.log("delete"))
+
+//register
+$('#register').click((e) => {
+    var email = $('#userEmail').val()
+    var password=$('#userPassword').val()
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+        $('form')[0].reset()
+    })
+    e.preventDefault()
+});
+
+$("body").click(function(e){
+    // console.log(e)
+       if (e.target.id === "delete-movie") {
+            deleteMovie()
+        }
+})
+
+$('body').on("click", ".delete-movie", (e) => {
+    var parentId =e.target.parentNode.id
+    $.ajax({
+        url: `https://movie-history-great-scott.firebaseio.com/${uid}/${parentId}.json`,
+        type:'DELETE'
+    })
+        .done(function(e) {
+        clearMovie()
+        myMovies() // <--send saved movies to function populateMyMoviesPage
+        // console.log("your saved movies are:", e)
+    })
+})
