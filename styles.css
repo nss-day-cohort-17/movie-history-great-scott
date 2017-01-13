@@ -15,13 +15,13 @@
 }
 
 .car-msg-wrapper {
-    position: inherit;
-    margin-left: 61%;
+    position: absolute;;
+    margin-left: 82%;
     background-image: url(bubble-icon-with-text.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 100%;
-    padding-top: 5%;
+    padding-top:4%;
     animation:3s;
     animation-name: carMsgBubble;
 }
