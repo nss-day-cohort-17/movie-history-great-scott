@@ -6,6 +6,32 @@
   justify-content: space-between;
 }
 
+#loginPage {
+
+
+}
+#userEmail {
+  height 300px;
+}
+#loginPage::after {
+  content: "";
+  background: url(login.jpg);
+  /*background: linear-gradient(green,#e3e0cf );*/
+  background-repeat: no-repeat;
+  opacity: 0.2;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+
+}
+.main-header {
+  padding-top: 5rem;
+  height: 700px;
+}
+
 #movieTitle {
   max-width: 50%;
 }

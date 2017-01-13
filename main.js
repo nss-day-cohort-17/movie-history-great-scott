@@ -84,7 +84,7 @@ function loadMovie(data){
                         "watched" : false,
                         "poster" : data.Poster
                     }
-    console.log(JSON.stringify(newMovieData))
+    // console.log(JSON.stringify(newMovieData))
     //appends card to html
     $(".movie-body").append(`<div class="movie-card col-md-5">
                                 <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
@@ -95,17 +95,15 @@ function loadMovie(data){
         validateRating(data)
 
         $(".movie-card").append(`<label for="watchedCheck">Check box if watched</label>
-
             <input id="watchedCheck" type="checkbox" class="watched">
             </button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
-
         $('#movieTitle').val('').focus()
 }
 //saving the movie
 function saveMovie(e){
     //SAVE MOVIE OBJECT AS VAR
-    console.log(uid)
-    console.log(newMovieData);
+    // console.log(uid)
+    // console.log(newMovieData);
     $.post(`https://movie-history-great-scott.firebaseio.com/${uid}.json`,
         JSON.stringify({movie : newMovieData})
     ).then(console.log)
@@ -133,7 +131,7 @@ function myMovies(){
 }
 
 function populateMyMoviesPage(data) {
-    console.log(data)
+    // console.log(data)
         for(var obj in data) {
                 $(".myMovies").append(`<div class="movie-card col-md-3" id="${obj}">
                                             <img src="${data[obj].movie.poster}" alt="'{data[obj].movie.title}'' movie poster" class="movie-poster">
@@ -199,6 +197,8 @@ $("#search-movie").click(function(){
   });
 })
 
+//====CLICK EVENTS============
+
 $("body").on('click', '#save-movie', function(){
     saveMovie()
 })
@@ -206,43 +206,6 @@ $("body").on('click', '#save-movie', function(){
 $("body").on('click', '#watchedChecked', function(){
     watched()
 })
-
-//adds and removes animation class after animation is finished
-$('body :button').click(()=>{
-    $('.hidden-del').addClass('delorean').removeClass('hidden');
-    $('.car-msg-wrapper').removeClass('hidden')
-    $(".hidden-del").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',()=> {
-        $(".hidden-del").removeClass('delorean').addClass('hidden');
-        $(".car-msg-wrapper").addClass("hidden");
-    });
-});
-
-//logout
-$('#logout').click(() => {
-  firebase.auth().signOut()
-});
-
-//login when hit login button
-$('#loginPage form').submit((e) => {
-    var email = $('#userEmail').val()
-    var password=$('#userPassword').val()
-    firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
-        $('form')[0].reset()
-    })
-    e.preventDefault()
-});
-
-$('.delete').click(() => console.log("delete"))
-
-//register
-$('#register').click((e) => {
-    var email = $('#userEmail').val()
-    var password=$('#userPassword').val()
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
-        $('form')[0].reset()
-    })
-    e.preventDefault()
-});
 
 $("body").click(function(e){
     // console.log(e)
@@ -263,3 +226,42 @@ $('body').on("click", ".delete-movie", (e) => {
         // console.log("your saved movies are:", e)
     })
 })
+
+//adds and removes animation class after animation is finished
+$('body :button').click(()=>{
+    $('.hidden-del').addClass('delorean').removeClass('hidden');
+    $('.car-msg-wrapper').removeClass('hidden')
+    $(".hidden-del").one('webkitAnimationEnd oanimationend msAnimationEnd animationend',()=> {
+        $(".hidden-del").removeClass('delorean').addClass('hidden');
+        $(".car-msg-wrapper").addClass("hidden");
+    });
+});
+
+//logout
+$('#logout').click(() => {
+  firebase.auth().signOut()
+});
+
+
+
+//login when hit login button
+$('#loginPage form').submit((e) => {
+    var email = $('#userEmail').val()
+    var password=$('#userPassword').val()
+    firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+        $('form')[0].reset()
+    })
+    e.preventDefault()
+});
+
+
+
+//register
+$('#register').click((e) => {
+    var email = $('#userEmail').val()
+    var password=$('#userPassword').val()
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
+        $('form')[0].reset()
+    })
+    e.preventDefault()
+});
