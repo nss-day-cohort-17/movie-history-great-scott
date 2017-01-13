@@ -32,7 +32,6 @@ firebase.auth().onAuthStateChanged(() => {
 //logout
 $('#logout').click(() => {
   firebase.auth().signOut()
-
 });
 
 //login when hit login button
@@ -41,8 +40,20 @@ $('#loginPage form').submit((e) => {
  var password=$('#userPassword').val()
 
 
- firebase.auth().createUserWithEmailAndPassword(email, password)
-     firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+
+  firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+      $('form')[0].reset()
+     })
+e.preventDefault()
+});
+
+//register
+$('#register').click((e) => {
+
+var email = $('#userEmail').val()
+ var password=$('#userPassword').val()
+
+  firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
       $('form')[0].reset()
      })
 e.preventDefault()
