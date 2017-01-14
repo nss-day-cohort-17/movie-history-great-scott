@@ -85,25 +85,12 @@
   right: 0;
   position: absolute;
   z-index: -1;
-
-}
-.main-header {
-  padding-top: 5rem;
-  height: 700px;
-}
-
-#movieTitle {
-  max-width: 50%;
-}
-
-.button-group {
-  margin-top: 3px;
 }
 
 .car-msg-wrapper {
     position: absolute;;
     margin-left: 76%;
-    background-image: url(bubble-icon-with-text.png);
+    background-image: url(images/bubble-icon-with-text.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 100%;
@@ -142,6 +129,7 @@
         left: -150%
     }
 }
+
 /*animation for the message bubble*/
 @keyframes carMsgBubble {
     0% {
@@ -207,13 +195,20 @@ margin-left:2rem;
   margin: auto;
   justify-content: center;
 }
- .hidden {
-  display: none;
- }
 
- header{
-    padding: 10px;
-    background-color: rgba(205, 211, 211, .9);
-    box-shadow: 0px 5px 10px white;
-    border-radius: 10px;
- }
+
+/*fonts*/
+
+@font-face {
+        font-family: 'impactLabel';
+        src: url('fonts/Impact Label.ttf');
+        font-weight: normal;
+        font-style: normal;
+}
+
+@font-face {
+        font-family: 'digii';
+        src: url('fonts/DS-DIGII.TTF');
+        font-weight: normal;
+        font-style: normal;
+}
