@@ -66,10 +66,7 @@ function getMovie(){
 
 
 function failMovie(data){
-
     $(".movie-body").append(`<h1>${data.Error}</h1>`)
-
-    console.log("no movie")
 }
 
 //Loads movie card with basic info about movie
@@ -84,7 +81,7 @@ function loadMovie(data){
                         "watched" : false,
                         "poster" : data.Poster
                     }
-    // console.log(JSON.stringify(newMovieData))
+
     //appends card to html
     $(".movie-body").append(`<div class="movie-card col-md-5">
                                 <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
@@ -102,18 +99,15 @@ function loadMovie(data){
 //saving the movie
 function saveMovie(e){
     //SAVE MOVIE OBJECT AS VAR
-    // console.log(uid)
-    // console.log(newMovieData);
+
     $.post(`https://movie-history-great-scott.firebaseio.com/${uid}.json`,
         JSON.stringify({movie : newMovieData})
-    ).then(console.log)
-    clearMovie()
+    ).then(clearMovie)
 }
 
-function watched() {
-    var watchedChx = $('#watchedCheck')
-    console.log("newMovieData", newMovieData)
-    if (watchedChx.checked) {
+function watched(e) {
+    var check = $("#watchedCheck")
+    if (watchedCheck.checked) {
         newMovieData.watched = true
     } else {
         newMovieData.watched = false
@@ -122,16 +116,13 @@ function watched() {
 
 // go get saved  movies from firebase
 function myMovies(){
-    // console.log("new log",newMovieData)
     $.ajax({url: `https://movie-history-great-scott.firebaseio.com/${uid}.json`})
         .done(function(e) {
         populateMyMoviesPage(e) // <--send saved movies to function populateMyMoviesPage
-        // console.log("your saved movies are:", e)
     })
 }
 
 function populateMyMoviesPage(data) {
-    // console.log(data)
         for(var obj in data) {
                 $(".myMovies").append(`<div class="movie-card col-md-3" id="${obj}">
                                             <img src="${data[obj].movie.poster}" alt="'{data[obj].movie.title}'' movie poster" class="movie-poster">
@@ -143,11 +134,6 @@ function populateMyMoviesPage(data) {
          }
 }
 
-function deleteMovie(e){
-    console.log("delete")
-    /// AJAX CALL HERE TO DELETE
-}
-
 //Valdates if there is a number rating and rounds it
 function validateRating(data){
     if(data.imdbRating ==="N/A"){
@@ -157,11 +143,9 @@ function validateRating(data){
     }
 }
 
-
 //clear movie
 function clearMovie(){
     $(".movie-body").empty()
-    $(".myMovies").empty()
     $('#movieTitle').val('').focus()
 }
 
@@ -177,13 +161,12 @@ Event Handlers
 *******************/
 
 $('#new-movie').click(function(){
-     // $('.main').show()
     getMovie()
     showAdd()
 })
 
+
 $("body").click(function(e){
-    // console.log(e)
        if (e.target.id === "delete-movie") {
             deleteMovie()
         }
@@ -191,27 +174,21 @@ $("body").click(function(e){
 
 //====my movie pages display/hide
 $("#search-movie").click(function(){
-    $('.movie-body').hide()
-    $( ".myMovies" ).show( "slow", function() {
-        myMovies()
-  });
+    $('.movie-body').addClass('hidden')
+    $( ".myMovies" ).removeClass('hidden')
+    myMovies()
+
 })
 
-//====CLICK EVENTS============
 
 $("body").on('click', '#save-movie', function(){
     saveMovie()
 })
 
-$("body").on('click', '#watchedChecked', function(){
-    watched()
-})
+// watched checkbox
 
-$("body").click(function(e){
-    // console.log(e)
-       if (e.target.id === "delete-movie") {
-            deleteMovie()
-        }
+$("body").on("click", "#watchedCheck", function(){
+    watched()
 })
 
 $('body').on("click", ".delete-movie", (e) => {
@@ -227,7 +204,8 @@ $('body').on("click", ".delete-movie", (e) => {
     })
 })
 
-//adds and removes animation class after animation is finished
+//adds and removes delorean animation class after animation is finished
+
 $('body :button').click(()=>{
     $('.hidden-del').addClass('delorean').removeClass('hidden');
     $('.car-msg-wrapper').removeClass('hidden')
@@ -255,7 +233,6 @@ $('#loginPage form').submit((e) => {
 });
 
 
-
 //register
 $('#register').click((e) => {
     var email = $('#userEmail').val()
@@ -265,3 +242,17 @@ $('#register').click((e) => {
     })
     e.preventDefault()
 });
+
+$('body').on("click", ".delete-movie", (e) => {
+    var parentId =e.target.parentNode.id
+    $.ajax({
+        url: `https://movie-history-great-scott.firebaseio.com/${uid}/${parentId}.json`,
+        type:'DELETE'
+    })
+        .done(function(e) {
+        $(".myMovies").empty()
+        myMovies() // <--send saved movies to function populateMyMoviesPage
+        // console.log("your saved movies are:", e)
+    })
+})
+
