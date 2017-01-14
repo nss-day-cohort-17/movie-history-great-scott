@@ -81,6 +81,7 @@ function loadMovie(data){
                         "watched" : false,
                         "poster" : data.Poster
                     }
+
     //appends card to html
     $(".movie-body").append(`<div class="movie-card col-md-5">
                                 <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
@@ -91,15 +92,14 @@ function loadMovie(data){
         validateRating(data)
 
         $(".movie-card").append(`<label for="watchedCheck">Check box if watched</label>
-
             <input id="watchedCheck" type="checkbox" class="watched">
             </button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
-
         $('#movieTitle').val('').focus()
 }
 //saving the movie
 function saveMovie(e){
     //SAVE MOVIE OBJECT AS VAR
+
     $.post(`https://movie-history-great-scott.firebaseio.com/${uid}.json`,
         JSON.stringify({movie : newMovieData})
     ).then(clearMovie)
@@ -180,7 +180,7 @@ $("#search-movie").click(function(){
 
 })
 
-// save movie button
+
 $("body").on('click', '#save-movie', function(){
     saveMovie()
 })
@@ -191,7 +191,21 @@ $("body").on("click", "#watchedCheck", function(){
     watched()
 })
 
+$('body').on("click", ".delete-movie", (e) => {
+    var parentId =e.target.parentNode.id
+    $.ajax({
+        url: `https://movie-history-great-scott.firebaseio.com/${uid}/${parentId}.json`,
+        type:'DELETE'
+    })
+        .done(function(e) {
+        clearMovie()
+        myMovies() // <--send saved movies to function populateMyMoviesPage
+        // console.log("your saved movies are:", e)
+    })
+})
+
 //adds and removes delorean animation class after animation is finished
+
 $('body :button').click(()=>{
     $('.hidden-del').addClass('delorean').removeClass('hidden');
     $('.car-msg-wrapper').removeClass('hidden')
@@ -206,6 +220,8 @@ $('#logout').click(() => {
   firebase.auth().signOut()
 });
 
+
+
 //login when hit login button
 $('#loginPage form').submit((e) => {
     var email = $('#userEmail').val()
@@ -216,6 +232,7 @@ $('#loginPage form').submit((e) => {
     e.preventDefault()
 });
 
+
 //register
 $('#register').click((e) => {
     var email = $('#userEmail').val()
@@ -225,13 +242,6 @@ $('#register').click((e) => {
     })
     e.preventDefault()
 });
-
-$("body").click(function(e){
-       if (e.target.id === "delete-movie") {
-            deleteMovie()
-        }
-})
-
 
 $('body').on("click", ".delete-movie", (e) => {
     var parentId =e.target.parentNode.id
@@ -245,3 +255,4 @@ $('body').on("click", ".delete-movie", (e) => {
         // console.log("your saved movies are:", e)
     })
 })
+
