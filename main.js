@@ -21,13 +21,15 @@ firebase.auth().onAuthStateChanged(() => {
   //logged in
   var email = firebase.auth().currentUser.email
     $("#loginPage").addClass('hidden')
-    $(".main ").removeClass('hidden')
-    $('.main  h1').text(`Welcome ${email}`)
+    $(".main").removeClass('hidden')
+    $(".main-header").removeClass('hidden')
+    $('.main-header h5').text(`${email}`)
     uid = firebase.auth().currentUser.uid
   }
   else {
       $("#loginPage").removeClass('hidden')
       $(".main").addClass('hidden')
+      $(".main-header").addClass('hidden')
     }
 })
 
