@@ -48,13 +48,31 @@
   justify-content: space-between;
 }
 
-#loginPage {
-
-
+.title-label {
+  font-family: impactLabel;
+  color: red;
+  font-size: 2em;
+  background-color: white;
 }
+
+#movieTitle {
+  max-width: 50%;
+  font-family: digii;
+  color: red;
+  background-color: black;
+  font-size: 1.2em;
+}
+
+
+
+
+
+
 #userEmail {
   height 300px;
 }
+
+
 #loginPage::after {
   content: "";
   background: url(login.jpg);
