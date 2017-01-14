@@ -257,4 +257,3 @@ $('body').on("click", ".delete-movie", (e) => {
         // console.log("your saved movies are:", e)
     })
 })
-

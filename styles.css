@@ -1,4 +1,46 @@
-/*header styles*/
+/*main header styles*/
+
+.main-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  background: url(images/brushed_metal.jpg);
+  background-size: cover;
+  -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+}
+
+.header-button-group {
+  margin-left: 10px;
+}
+
+.user-col {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.main-header h5 {
+  color: red;
+  font-family: digii;
+  font-size: 1.2em;
+  background-color: black;
+  padding: 5px;
+}
+
+
+
+/*add movie (main) page styles*/
+.main {
+  background-image: url(images/flux capacitor.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .input-group {
   margin-top: 10px;
   display: flex;
