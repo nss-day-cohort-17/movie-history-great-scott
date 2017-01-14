@@ -66,10 +66,7 @@ function getMovie(){
 
 
 function failMovie(data){
-
     $(".movie-body").append(`<h1>${data.Error}</h1>`)
-
-    console.log("no movie")
 }
 
 //Loads movie card with basic info about movie
@@ -84,7 +81,6 @@ function loadMovie(data){
                         "watched" : false,
                         "poster" : data.Poster
                     }
-    console.log(JSON.stringify(newMovieData))
     //appends card to html
     $(".movie-body").append(`<div class="movie-card col-md-5">
                                 <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
@@ -104,18 +100,14 @@ function loadMovie(data){
 //saving the movie
 function saveMovie(e){
     //SAVE MOVIE OBJECT AS VAR
-    console.log(uid)
-    console.log(newMovieData);
     $.post(`https://movie-history-great-scott.firebaseio.com/${uid}.json`,
         JSON.stringify({movie : newMovieData})
-    ).then(console.log)
-    clearMovie()
+    ).then(clearMovie)
 }
 
-function watched() {
-    var watchedChx = $('#watchedCheck')
-    console.log("newMovieData", newMovieData)
-    if (watchedChx.checked) {
+function watched(e) {
+    var check = $("#watchedCheck")
+    if (watchedCheck.checked) {
         newMovieData.watched = true
     } else {
         newMovieData.watched = false
@@ -124,16 +116,13 @@ function watched() {
 
 // go get saved  movies from firebase
 function myMovies(){
-    // console.log("new log",newMovieData)
     $.ajax({url: `https://movie-history-great-scott.firebaseio.com/${uid}.json`})
         .done(function(e) {
         populateMyMoviesPage(e) // <--send saved movies to function populateMyMoviesPage
-        // console.log("your saved movies are:", e)
     })
 }
 
 function populateMyMoviesPage(data) {
-    console.log(data)
         for(var obj in data) {
                 $(".myMovies").append(`<div class="movie-card col-md-3" id="${obj}">
                                             <img src="${data[obj].movie.poster}" alt="'{data[obj].movie.title}'' movie poster" class="movie-poster">
@@ -154,7 +143,6 @@ function validateRating(data){
     }
 }
 
-
 //clear movie
 function clearMovie(){
     $(".movie-body").empty()
@@ -173,9 +161,15 @@ Event Handlers
 *******************/
 
 $('#new-movie').click(function(){
-     // $('.main').show()
     getMovie()
     showAdd()
+})
+
+
+$("body").click(function(e){
+       if (e.target.id === "delete-movie") {
+            deleteMovie()
+        }
 })
 
 //====my movie pages display/hide
@@ -183,6 +177,7 @@ $("#search-movie").click(function(){
     $('.movie-body').addClass('hidden')
     $( ".myMovies" ).removeClass('hidden')
     myMovies()
+
 })
 
 // save movie button
@@ -191,7 +186,8 @@ $("body").on('click', '#save-movie', function(){
 })
 
 // watched checkbox
-$("body").on('click', '#watchedChecked', function(){
+
+$("body").on("click", "#watchedCheck", function(){
     watched()
 })
 
@@ -220,7 +216,6 @@ $('#loginPage form').submit((e) => {
     e.preventDefault()
 });
 
-
 //register
 $('#register').click((e) => {
     var email = $('#userEmail').val()
@@ -230,6 +225,12 @@ $('#register').click((e) => {
     })
     e.preventDefault()
 });
+
+$("body").click(function(e){
+       if (e.target.id === "delete-movie") {
+            deleteMovie()
+        }
+})
 
 
 $('body').on("click", ".delete-movie", (e) => {
