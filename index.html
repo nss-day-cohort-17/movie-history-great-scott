@@ -23,32 +23,47 @@
 
   </form>
 </div>
- <!--end login -->
+<!--end login -->
 
-<!--user movie page -->
+<!-- header -->
+  <header class="main-header hidden">
+    <div class="header-button-group">
+      <input class="btn btn-warning" id="new-movie" type="button" value="Find New Movies">
+      <input class="btn btn-warning" id="search-movie" type="button" value="Search Your Movies">
+    </div>
+    <div class="user-col">
+      <h5></h5>
+      <input class="btn btn-danger" id="logout" type="button" value="Logout">
+    </div>
+  </header>
+<!-- end header -->
 
-  <div class="main container hidden">
-    <header>
-    <h1>Hi ___</h1>
-      <div class="input-group">
-        <input id="movieTitle" type="text" class="form-control" placeholder="Movie Title" aria-describedby="basic-addon2">
-        <input class="btn btn-primary" id="logout" type="button" value="Logout">
-      </div>
-      <div class="button-group">
-        <input class="btn btn-info" id="new-movie" type="button" value="Find New Movies">
-        <input class="btn btn-info" id="search-movie" type="button" value="Search Your Movies">
-      </div>
+
+<!--main (add movie) page -->
+  <div class="main container-fluid hidden">
     <div class="car-msg-wrapper hidden">
         <h6 class="mile-per-hour"></h6>
     </div>
-        <img src="delorean.png" alt="The delorean from back to the furture" class="hidden-del hidden">
-  </header>
-    <div class="movie-body row"></div>
+    <img src="images/delorean.png" alt="The delorean from back to the future" class="hidden-del hidden">
+    <div class="add-left">
+      <div class="input-group ">
+        <p class="title-label">MOVIE TITLE</p>
+        <input id="movieTitle" type="text" class="form-control" aria-describedby="basic-addon2">
+      </div>
+    </div>
+    <div class="add-right">
+      <div class="movie-body"></div>
+    </div>
+
     <div class="myMovies">
       <div class="not-watched-movie"> </div>
       <div class="watched-movie"></div>
     </div>
   </div>
+<!-- end main page -->
+
+
+  <!-- scripts -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
   <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
