@@ -155,7 +155,8 @@ function clearMovie(){
 
 function showAdd() {
     $(".myMovies").addClass("hidden")
-    $(".movie-body").removeClass("hidden")
+    $(".add-page").removeClass("hidden")
+    $("#movieTitle").focus()
 }
 
 
