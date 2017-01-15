@@ -141,9 +141,9 @@ function populateMyMoviesPage(data) {
 //Valdates if there is a number rating and rounds it
 function validateRating(data){
     if(data.imdbRating ==="N/A"){
-        $(".movie-card").append(`<div class="rating-of-5">No ranking found</div>`)
+        $(".desc-wrap").append(`<div class="rating-of-5">No ranking found</div>`)
     }else{
-        $(".movie-card").append(`<div class="rating-of-5">Rating: ${Math.round(data.imdbRating/2)}</div>`)
+        $(".desc-wrap").append(`<div class="rating-of-5">Rating: ${Math.round(data.imdbRating/2)}</div>`)
     }
 }
 
