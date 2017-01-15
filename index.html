@@ -26,34 +26,46 @@
 <!--end login -->
 
 <!-- header -->
-  <header class="main-header hidden">
+  <header class="main-header navbar-fixed-top hidden">
     <div class="header-button-group">
-      <input class="btn btn-warning" id="new-movie" type="button" value="Find New Movies">
-      <input class="btn btn-warning" id="search-movie" type="button" value="Search Your Movies">
+      <input class="btn btn-warning butt" id="new-movie" type="button" value="Find New Movies">
+      <input class="btn btn-warning butt" id="search-movie" type="button" value="Search Your Movies">
+    </div>
+    <div class="gs">
+      <p>GREAT</p>
+      <img src="images/Doc-Brown.jpg" alt="Doc Brown" id="header-doc">
+      <p>SCOTT!</p>
     </div>
     <div class="user-col">
       <h5></h5>
-      <input class="btn btn-danger" id="logout" type="button" value="Logout">
+      <input class="btn btn-danger butt" id="logout" type="button" value="Logout">
     </div>
   </header>
 <!-- end header -->
 
 
-<!--main (add movie) page -->
-  <div class="main container-fluid hidden">
-    <div class="car-msg-wrapper hidden">
-        <h6 class="mile-per-hour"></h6>
+<!--main page -->
+  <div class="main hidden">
+    <div class="car container">
+      <div class="car-msg-wrapper hidden">
+          <h6 class="mile-per-hour"></h6>
+      </div>
+      <img src="images/delorean.png" alt="The delorean from back to the future" class="hidden-del hidden">
     </div>
-    <img src="images/delorean.png" alt="The delorean from back to the future" class="hidden-del hidden">
-    <div class="add-left">
-      <div class="input-group ">
+    <!-- add page -->
+    <div class="add-page hidden row">
+      <form class="add-left title-group col-md-6" autocomplete="off">
         <p class="title-label">MOVIE TITLE</p>
         <input id="movieTitle" type="text" class="form-control" aria-describedby="basic-addon2">
+        <button class="btn btn-danger add-search" type="submit">Search</button>
+        <p class="left-title">NEW MOVIE SEARCH</p>
+      </form>
+      <div class="add-right col-md-6">
+        <div class="movie-body">
+        </div>
       </div>
     </div>
-    <div class="add-right">
-      <div class="movie-body"></div>
-    </div>
+    <!-- end add page -->
 
     <div class="myMovies">
       <div class="not-watched-movie"> </div>
