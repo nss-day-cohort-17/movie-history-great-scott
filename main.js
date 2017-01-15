@@ -166,9 +166,17 @@ Event Handlers
 *******************/
 
 $('#new-movie').click(function(){
-    getMovie()
     showAdd()
 })
+
+$('body').on("submit", ".add-search",function(){
+    getMovie()
+})
+
+$('.add-left').submit((e) => {
+    e.preventDefault()
+    getMovie()
+});
 
 
 $("body").click(function(e){
