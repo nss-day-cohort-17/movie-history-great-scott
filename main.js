@@ -85,17 +85,19 @@ function loadMovie(data){
                     }
 
     //appends card to html
-    $(".movie-body").append(`<div class="movie-card col-md-5">
-                                <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
+    $(".movie-body").append(`<div class="add-card">
+                                <div class="poster-wrap">
+                                <img src="${data.Poster}" alt="${data.Title} movie poster" class="add-poster">
+                                </div>
+                                <div class="desc-wrap">
                                 <div class="title"> ${data.Title}</div>
                                 <div class="year"> ${data.Year}</div>
-                                <div class="actors">Main Actors: ${data.Actors}</div>
+                                <div class="actors"><strong>Main Actors: </strong>${data.Actors}</div>
                             </div>`)
         validateRating(data)
 
-        $(".movie-card").append(`<label for="watchedCheck">Check box if watched</label>
-            <input id="watchedCheck" type="checkbox" class="watched">
-            </button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
+        $(".desc-wrap").append(`<label for="watchedCheck"><input id="watchedCheck" type="checkbox" class="watched"> Watched?</label>
+            <input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies"></div>`)
         $('#movieTitle').val('').focus()
 }
 //saving the movie
