@@ -187,7 +187,7 @@ $("body").click(function(e){
 
 //====my movie pages display/hide
 $("#search-movie").click(function(){
-    $('.movie-body').addClass('hidden')
+    $('.add-page').addClass('hidden')
     $( ".myMovies" ).removeClass('hidden')
     myMovies()
 
