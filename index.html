@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Movie History</title>
-  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
   <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
 
+<!-- login page -->
 <div id="loginPage" class="login-page hidden">
-  <form class="main-header container">
-
+  <form class="container">
     <div class="input-group">
       <input id="userEmail" type="email" class="form-control" placeholder="example@88mph.com" aria-describedby="basic-addon2">
       <input id="userPassword" type="password" class="form-control" placeholder="password" aria-describedby="basic-addon2">
@@ -23,32 +23,59 @@
 
   </form>
 </div>
- <!--end login -->
+<!--end login -->
 
-<!--user movie page -->
-
-  <div class="main container hidden">
-    <header>
-    <h1>Hi ___</h1>
-      <div class="input-group">
-        <input id="movieTitle" type="text" class="form-control" placeholder="Movie Title" aria-describedby="basic-addon2">
-        <input class="btn btn-primary" id="logout" type="button" value="Logout">
-      </div>
-      <div class="button-group">
-        <input class="btn btn-info" id="new-movie" type="button" value="Find New Movies">
-        <input class="btn btn-info" id="search-movie" type="button" value="Search Your Movies">
-      </div>
-    <div class="car-msg-wrapper hidden">
-        <h6 class="mile-per-hour"></h6>
+<!-- header -->
+  <header class="main-header navbar-fixed-top hidden">
+    <div class="header-button-group">
+      <input class="btn btn-warning butt" id="new-movie" type="button" value="Find New Movies">
+      <input class="btn btn-warning butt" id="search-movie" type="button" value="Search Your Movies">
     </div>
-        <img src="delorean.png" alt="The delorean from back to the furture" class="hidden-del hidden">
+    <div class="gs">
+      <p>GREAT</p>
+      <img src="images/Doc-Brown.jpg" alt="Doc Brown" id="header-doc">
+      <p>SCOTT!</p>
+    </div>
+    <div class="user-col">
+      <h5></h5>
+      <input class="btn btn-danger butt" id="logout" type="button" value="Logout">
+    </div>
   </header>
-    <div class="movie-body row"></div>
+<!-- end header -->
+
+
+<!--main page -->
+  <div class="main hidden">
+    <div class="car container">
+      <div class="car-msg-wrapper hidden">
+          <h6 class="mile-per-hour"></h6>
+      </div>
+      <img src="images/delorean.png" alt="The delorean from back to the future" class="hidden-del hidden">
+    </div>
+    <!-- add page -->
+    <div class="add-page hidden row">
+      <form class="add-left title-group col-md-6" autocomplete="off">
+        <p class="title-label">MOVIE TITLE</p>
+        <input id="movieTitle" type="text" class="form-control" aria-describedby="basic-addon2">
+        <button class="btn btn-danger add-search" type="submit">Search</button>
+        <p class="left-title">NEW MOVIE SEARCH</p>
+      </form>
+      <div class="add-right col-md-6">
+        <div class="movie-body">
+        </div>
+      </div>
+    </div>
+    <!-- end add page -->
+
     <div class="myMovies">
       <div class="not-watched-movie"> </div>
       <div class="watched-movie"></div>
     </div>
   </div>
+<!-- end main page -->
+
+
+  <!-- scripts -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="https://www.gstatic.com/firebasejs/3.6.5/firebase.js"></script>
   <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>

@@ -21,13 +21,15 @@ firebase.auth().onAuthStateChanged(() => {
   //logged in
   var email = firebase.auth().currentUser.email
     $("#loginPage").addClass('hidden')
-    $(".main ").removeClass('hidden')
-    $('.main  h1').text(`Welcome ${email}`)
+    $(".main").removeClass('hidden')
+    $(".main-header").removeClass('hidden')
+    $('.main-header h5').text(`${email}`)
     uid = firebase.auth().currentUser.uid
   }
   else {
       $("#loginPage").removeClass('hidden')
       $(".main").addClass('hidden')
+      $(".main-header").addClass('hidden')
     }
 })
 
@@ -83,17 +85,19 @@ function loadMovie(data){
                     }
 
     //appends card to html
-    $(".movie-body").append(`<div class="movie-card col-md-5">
-                                <img src="${data.Poster}" alt="${data.Title} movie poster" class="movie-poster">
+    $(".movie-body").append(`<div class="add-card">
+                                <div class="poster-wrap">
+                                <img src="${data.Poster}" alt="${data.Title} movie poster" class="add-poster">
+                                </div>
+                                <div class="desc-wrap">
                                 <div class="title"> ${data.Title}</div>
                                 <div class="year"> ${data.Year}</div>
-                                <div class="actors">Main Actors: ${data.Actors}</div>
+                                <div class="actors"><strong>Main Actors: </strong>${data.Actors}</div>
                             </div>`)
         validateRating(data)
 
-        $(".movie-card").append(`<label for="watchedCheck">Check box if watched</label>
-            <input id="watchedCheck" type="checkbox" class="watched">
-            </button><input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies">`)
+        $(".desc-wrap").append(`<label for="watchedCheck"><input id="watchedCheck" type="checkbox" class="watched"> Watched?</label>
+            <input class="btn btn-primary" id="save-movie" type="button" value="Add to My Movies"></div>`)
         $('#movieTitle').val('').focus()
 }
 //saving the movie
@@ -137,9 +141,9 @@ function populateMyMoviesPage(data) {
 //Valdates if there is a number rating and rounds it
 function validateRating(data){
     if(data.imdbRating ==="N/A"){
-        $(".movie-card").append(`<div class="rating-of-5">No ranking found</div>`)
+        $(".desc-wrap").append(`<div class="rating-of-5">No ranking found</div>`)
     }else{
-        $(".movie-card").append(`<div class="rating-of-5">Rating: ${Math.round(data.imdbRating/2)}</div>`)
+        $(".desc-wrap").append(`<div class="rating-of-5">Rating: ${Math.round(data.imdbRating/2)}</div>`)
     }
 }
 
@@ -151,7 +155,8 @@ function clearMovie(){
 
 function showAdd() {
     $(".myMovies").addClass("hidden")
-    $(".movie-body").removeClass("hidden")
+    $(".add-page").removeClass("hidden")
+    $("#movieTitle").focus()
 }
 
 
@@ -161,9 +166,17 @@ Event Handlers
 *******************/
 
 $('#new-movie').click(function(){
-    getMovie()
     showAdd()
 })
+
+$('body').on("submit", ".add-search",function(){
+    getMovie()
+})
+
+$('.add-left').submit((e) => {
+    e.preventDefault()
+    getMovie()
+});
 
 
 $("body").click(function(e){
@@ -174,7 +187,7 @@ $("body").click(function(e){
 
 //====my movie pages display/hide
 $("#search-movie").click(function(){
-    $('.movie-body').addClass('hidden')
+    $('.add-page').addClass('hidden')
     $( ".myMovies" ).removeClass('hidden')
     myMovies()
 
@@ -255,4 +268,3 @@ $('body').on("click", ".delete-movie", (e) => {
         // console.log("your saved movies are:", e)
     })
 })
-

@@ -1,4 +1,177 @@
-/*header styles*/
+/*general styles*/
+
+.butt {
+  border: 1px solid black;
+}
+
+
+
+
+/*main header styles*/
+
+.main-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  background: url(images/brushed_metal.jpg);
+  background-size: cover;
+  -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);
+  z-index: 99;
+}
+
+.header-button-group {
+  margin-left: 10px;
+}
+
+.gs {
+  display: flex;
+  font-family: impactLabel;
+  color: black;
+  font-size: 4em;
+}
+
+#header-doc {
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
+.gs p {
+  background-color: white;
+  height: 55px;
+  line-height: 70px;
+  margin-top: 10px;
+}
+
+.user-col {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.main-header h5 {
+  color: red;
+  font-family: digii;
+  font-size: 1.2em;
+  background-color: black;
+  padding: 5px;
+}
+
+
+
+.main {
+  margin-top: 8%;
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.45),
+      rgba(255, 255, 255, 0.45)
+    ),
+    url(images/delorean-bkgrnd.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 575px;
+  min-width: 1024px;
+  z-index: -1
+}
+
+
+/*add page styles*/
+.add-page {
+  margin-top: 8%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.add-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url(images/search-bkgrnd.png);
+  background-size: cover;
+  padding: 2.5%;
+  border-radius: 15px;
+  max-width: 40%;
+  margin-bottom: 7%;
+  -webkit-box-shadow: -11px 10px 12px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: -11px 10px 12px 0px rgba(0,0,0,0.75);
+  box-shadow: -11px 10px 12px 0px rgba(0,0,0,0.75);
+}
+
+.title-label {
+  font-family: impactLabel;
+  color: red;
+  font-size: 2em;
+  background-color: white;
+  padding: none;
+  margin-top: 15%;
+  height: 15px;
+  line-height: 15px;
+  display: block;
+}
+
+#movieTitle {
+  max-width: 80%;
+  font-family: digii;
+  color: red;
+  background-color: black;
+  font-size: 5em;
+  display: block;
+  margin-top: 5px;
+  height: 1em;
+}
+
+.add-search {
+  margin-top: 10px;
+  border: 1px solid black;
+}
+
+.left-title {
+  font-family: impactLabel;
+  color: black;
+  font-size: 2.5em;
+  background-color: white;
+  padding: none;
+  margin-top: 15%;
+  height: 20px;
+  line-height: 20px;
+  display: block;
+}
+
+.movie-body {
+
+}
+
+.add-card {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    border: black solid 1px;
+    background-color: #bcbcbc;
+    padding-bottom: 15px;
+    border-radius: 5px;
+    justify-content: space-around;
+}
+
+.add-poster {
+  max-width: 18em;
+}
+
+.desc-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  margin-left: 15px;
+  justify-content: space-between;
+}
+
+
+
+
 .input-group {
   margin-top: 10px;
   display: flex;
@@ -6,13 +179,11 @@
   justify-content: space-between;
 }
 
-#loginPage {
-
-
-}
 #userEmail {
   height 300px;
 }
+
+
 #loginPage::after {
   content: "";
   background: url(login.jpg);
@@ -25,25 +196,12 @@
   right: 0;
   position: absolute;
   z-index: -1;
-
-}
-.main-header {
-  padding-top: 5rem;
-  height: 700px;
-}
-
-#movieTitle {
-  max-width: 50%;
-}
-
-.button-group {
-  margin-top: 3px;
 }
 
 .car-msg-wrapper {
     position: absolute;;
     margin-left: 76%;
-    background-image: url(bubble-icon-with-text.png);
+    background-image: url(images/bubble-icon-with-text.png);
     background-size: contain;
     background-repeat: no-repeat;
     width: 100%;
@@ -82,6 +240,7 @@
         left: -150%
     }
 }
+
 /*animation for the message bubble*/
 @keyframes carMsgBubble {
     0% {
@@ -104,12 +263,7 @@ body {
 .card-wrapper {
   margin-top: 100px;
 }
-.movie-body {
-   text-align: center;
-   padding-top: 6rem;
-   display: flex;
-   justify-content: center;
-}
+
 .movie-card{
     padding-top: 2rem;
     border: black solid 1px;
@@ -147,13 +301,20 @@ margin-left:2rem;
   margin: auto;
   justify-content: center;
 }
- .hidden {
-  display: none;
- }
 
- header{
-    padding: 10px;
-    background-color: rgba(205, 211, 211, .9);
-    box-shadow: 0px 5px 10px white;
-    border-radius: 10px;
- }
+
+/*fonts*/
+
+@font-face {
+        font-family: 'impactLabel';
+        src: url('fonts/Impact Label.ttf');
+        font-weight: normal;
+        font-style: normal;
+}
+
+@font-face {
+        font-family: 'digii';
+        src: url('fonts/DS-DIGII.TTF');
+        font-weight: normal;
+        font-style: normal;
+}
