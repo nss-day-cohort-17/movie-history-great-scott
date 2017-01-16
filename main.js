@@ -128,13 +128,23 @@ function myMovies(){
 
 function populateMyMoviesPage(data) {
         for(var obj in data) {
-                $(".myMovies").append(`<div class="movie-card col-md-3" id="${obj}">
+            if (data[obj].movie.watched){
+                $(".watched-movie").append(`<div class="movie-card col-md-3" id="${obj}">
                                             <img src="${data[obj].movie.poster}" alt="'{data[obj].movie.title}'' movie poster" class="movie-poster">
                                             <div class="title"> ${data[obj].movie.title}</div>
                                             <div class="year"> ${data[obj].movie.year}</div>
                                             <div class="actors">Main Actors: ${data[obj].movie.actors}</div>
                                             <button class="delete-movie">Remove Movie</button>
                                     </div>`)
+            } else {
+                $(".not-watched-movie").append(`<div class="movie-card col-md-3" id="${obj}">
+                                            <img src="${data[obj].movie.poster}" alt="'{data[obj].movie.title}'' movie poster" class="movie-poster">
+                                            <div class="title"> ${data[obj].movie.title}</div>
+                                            <div class="year"> ${data[obj].movie.year}</div>
+                                            <div class="actors">Main Actors: ${data[obj].movie.actors}</div>
+                                            <button class="delete-movie">Remove Movie</button>
+                                    </div>`)
+            }
          }
 }
 
