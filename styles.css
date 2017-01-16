@@ -293,7 +293,7 @@ margin-left:2rem;
 
 }
 
-.myMovies {
+.myMovies, .myMovieData{
   display: flex;
   flex-wrap: wrap;
   text-align: center;
