@@ -293,13 +293,27 @@ margin-left:2rem;
 
 }
 
-.myMovies, .myMovieData{
-  display: flex;
-  flex-wrap: wrap;
-  text-align: center;
+.myMovies{
   padding-top: 15rem;
   margin: auto;
   justify-content: center;
+}
+
+.myMovieData{
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+.errorImage{
+    justify-content: center;
+    border-radius: 60px;
+    box-shadow: 0px 5px 30px black;
+}
+.errorMsg{
+    color: white;
+    text-shadow: 2px 2px 5px red;
 }
 
 
