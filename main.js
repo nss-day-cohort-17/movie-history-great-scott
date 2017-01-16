@@ -128,8 +128,9 @@ function myMovies(){
 }
 
 function populateMyMoviesPage(data) {
+        $(".myMovieData").empty()
         for(var obj in data) {
-                $(".myMovies").append(`<div class="movie-card col-md-3" id="${obj}">
+                $(".myMovieData").append(`<div class="movie-card col-md-3" id="${obj}">
                                             <img src="${data[obj].movie.poster}" alt="'{data[obj].movie.title}'' movie poster" class="movie-poster">
                                             <div class="title"> ${data[obj].movie.title}</div>
                                             <div class="year"> ${data[obj].movie.year}</div>
@@ -212,7 +213,6 @@ $('body').on("click", ".delete-movie", (e) => {
         type:'DELETE'
     })
         .done(function(e) {
-        clearMovie()
         myMovies() // <--send saved movies to function populateMyMoviesPage
         // console.log("your saved movies are:", e)
     })
@@ -256,16 +256,3 @@ $('#register').click((e) => {
     })
     e.preventDefault()
 });
-
-$('body').on("click", ".delete-movie", (e) => {
-    var parentId =e.target.parentNode.id
-    $.ajax({
-        url: `https://movie-history-great-scott.firebaseio.com/${uid}/${parentId}.json`,
-        type:'DELETE'
-    })
-        .done(function(e) {
-        $(".myMovies").empty()
-        myMovies() // <--send saved movies to function populateMyMoviesPage
-        // console.log("your saved movies are:", e)
-    })
-})
