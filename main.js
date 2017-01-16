@@ -113,9 +113,12 @@ function watched(e) {
     var check = $("#watchedCheck")
     if (watchedCheck.checked) {
         newMovieData.watched = true
+
     } else {
         newMovieData.watched = false
+
     }
+ myMovies()
 }
 
 // go get saved  movies from firebase
@@ -123,11 +126,22 @@ function myMovies(){
     $.ajax({url: `https://movie-history-great-scott.firebaseio.com/${uid}.json`})
         .done(function(e) {
         populateMyMoviesPage(e) // <--send saved movies to function populateMyMoviesPage
-    })
+    }).catch(console.log)
 }
 
 function populateMyMoviesPage(data) {
         for(var obj in data) {
+            console.log("fight club should be true" ,data[obj].movie.watched)
+            if(data[obj].movie.watched === true) {
+                $(".watched-movie").append(`<div class="movie-card col-md-3" id="${obj}">
+                                            <img src="${data[obj].movie.poster}" alt="'{data[obj].movie.title}'' movie poster" class="movie-poster">
+                                            <div class="title"> ${data[obj].movie.title}</div>
+                                            <div class="year"> ${data[obj].movie.year}</div>
+                                            <div class="actors">Main Actors: ${data[obj].movie.actors}</div>
+                                            <button class="delete-movie">Remove Movie</button>
+                                    </div>`)
+            }
+            else {
                 $(".myMovies").append(`<div class="movie-card col-md-3" id="${obj}">
                                             <img src="${data[obj].movie.poster}" alt="'{data[obj].movie.title}'' movie poster" class="movie-poster">
                                             <div class="title"> ${data[obj].movie.title}</div>
@@ -135,6 +149,8 @@ function populateMyMoviesPage(data) {
                                             <div class="actors">Main Actors: ${data[obj].movie.actors}</div>
                                             <button class="delete-movie">Remove Movie</button>
                                     </div>`)
+
+            }
          }
 }
 
@@ -204,18 +220,18 @@ $("body").on("click", "#watchedCheck", function(){
     watched()
 })
 
-$('body').on("click", ".delete-movie", (e) => {
-    var parentId =e.target.parentNode.id
-    $.ajax({
-        url: `https://movie-history-great-scott.firebaseio.com/${uid}/${parentId}.json`,
-        type:'DELETE'
-    })
-        .done(function(e) {
-        clearMovie()
-        myMovies() // <--send saved movies to function populateMyMoviesPage
-        // console.log("your saved movies are:", e)
-    })
-})
+// $('body').on("click", ".delete-movie", (e) => {
+//     var parentId =e.target.parentNode.id
+//     $.ajax({
+//         url: `https://movie-history-great-scott.firebaseio.com/${uid}/${parentId}.json`,
+//         type:'DELETE'
+//     })
+//         .done(function(e) {
+//         clearMovie()
+//         myMovies() // <--send saved movies to function populateMyMoviesPage
+//         // console.log("your saved movies are:", e)
+//     })
+// })
 
 //adds and removes delorean animation class after animation is finished
 
