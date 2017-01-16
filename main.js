@@ -68,7 +68,8 @@ function getMovie(){
 
 
 function failMovie(data){
-    $(".movie-body").append(`<h1>${data.Error}</h1>`)
+    $(".movie-body").append(`<img src="images/great_scott_face.jpg" alt="Surprized Face">
+                             <h1>Great Scott! ${data.Error}</h1>`)
 }
 
 //Loads movie card with basic info about movie
